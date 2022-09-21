@@ -10,8 +10,8 @@ Imports:
     glue,
     htmltools,
     magrittr,
-    shiny,
     shinyjs,
+    shiny,
     utils
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

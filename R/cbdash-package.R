@@ -3,7 +3,7 @@
 #'
 #' @importFrom glue glue
 #'
-#' @import htmltools shiny shinyjs
+#' @import htmltools shiny
 #'
 #' @keywords internal
 "_PACKAGE"

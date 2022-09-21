@@ -19,15 +19,15 @@ ui <- cb_page(
         menu = cb_navbar_menu(
             cb_navbar_item('page_home', 'Home', icon='house'),
             cb_navbar_heading('Analyze'),
-            cb_navbar_item('page_datasets', 'Datasets', icon=shiny::icon('line-chart')),
-            cb_navbar_item('page_analysis', 'Analysis', icon=shiny::icon('line-chart')),
-            cb_navbar_item('page_visualizations', 'Visualization', icon=shiny::icon('line-chart')),
+            cb_navbar_item('page_datasets', 'Datasets', icon=shiny::icon('chart-line')),
+            cb_navbar_item('page_analysis', 'Analysis', icon=shiny::icon('chart-line')),
+            cb_navbar_item('page_visualizations', 'Visualization', icon=shiny::icon('chart-line')),
             cb_navbar_heading('Organize'),
-            cb_navbar_item('page_projects', 'Projects', icon=shiny::icon('line-chart')),
-            cb_navbar_item('page_all_projects', 'Pipelines', icon=shiny::icon('line-chart')),
+            cb_navbar_item('page_projects', 'Projects', icon=shiny::icon('chart-line')),
+            cb_navbar_item('page_all_projects', 'Pipelines', icon=shiny::icon('chart-line')),
             cb_navbar_heading('Learn'),
-            cb_navbar_item('page_stats_corner', 'Stats Corner', icon=shiny::icon('line-chart')),
-            cb_navbar_item('page_stats_corner', 'Tutorials', icon=shiny::icon('line-chart')),
+            cb_navbar_item('page_stats_corner', 'Stats Corner', icon=shiny::icon('chart-line')),
+            cb_navbar_item('page_stats_corner', 'Tutorials', icon=shiny::icon('chart-line')),
             # hidden pages
             shinyjs::hidden(cb_navbar_item('page_new_project')),
             shinyjs::hidden(cb_navbar_item('page_view_project'))
