@@ -57,6 +57,24 @@ cb_content_block <- function(title, subtitle, shadow = 5) {
 #'
 #' @examples
 cb_project_block_demo <- function() {
+    cb_project_block('Example Project',
+                     'This is an example project for you
+                     to build on!',
+                     date_created = '09/22/2022')
+}
+
+#' Title
+#'
+#' @param title
+#' @param side_button
+#'
+#' @return
+#' @export
+#'
+#' @examples
+cb_project_block <- function(title,
+                             description,
+                             date_created) {
     tags$div(
         class = "block block-rounded",
         tags$div(
@@ -69,11 +87,15 @@ cb_project_block_demo <- function() {
                     tags$h3(
                         class = "h5 fw-bold mb-2",
                         tags$i(class = "fa fa-circle text-info me-1"),
-                        "Example Project"
+                        title
+                    ),
+                    tags$p(
+                        class = "fs-sm text-muted mb-2",
+                        description
                     ),
                     tags$p(
                         class = "fs-sm text-muted mb-4",
-                        "Last Updated on 15th June, 2030"
+                        paste("Last Updated on", date_created)
                     ),
                     tags$p(
                         class = "fs-sm mb-0",
