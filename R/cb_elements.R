@@ -1,5 +1,13 @@
 
-# text input
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_text_input <- function(id, label, value = "", width = NULL, placeholder = NULL,
                           floating = FALSE) {
     if (floating) placeholder <- 'placeholder'
@@ -28,7 +36,15 @@ cb_text_input <- function(id, label, value = "", width = NULL, placeholder = NUL
 
 # text area
 
-# select {multiple} input
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_select_input <- function(id, label, choices, selected = NULL,
                             multiple = FALSE, select2 = TRUE,
                             width = NULL, size = NULL) {
@@ -60,7 +76,15 @@ cb_select_input <- function(id, label, choices, selected = NULL,
 
 # {inline} switch
 
-# file {multiple} input
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_file_input <- function(id,
                           label,
                           multiple = FALSE,

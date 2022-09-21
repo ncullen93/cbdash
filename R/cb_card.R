@@ -1,3 +1,12 @@
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_card <- function(title, ..., subtitle = NULL) {
     if (!is.null(subtitle)) subtitle <- tags$small(subtitle)
     tags$div(

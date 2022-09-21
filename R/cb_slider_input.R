@@ -1,3 +1,12 @@
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_slider_input <- function(id, label, min, max, value) {
     el <- shiny::sliderInput(
         id, label, min, max, value

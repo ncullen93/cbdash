@@ -1,4 +1,13 @@
 
+#' Title
+#'
+#' @param title
+#' @param side_button
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_content_heading <- function(title, side_button = NULL) {
     tags$h2(
         class = "content-heading d-flex justify-content-between align-items-center",
@@ -7,6 +16,15 @@ cb_content_heading <- function(title, side_button = NULL) {
     )
 }
 
+#' Title
+#'
+#' @param title
+#' @param side_button
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_content_block <- function(title, subtitle, shadow = 5) {
     tags$div(
         class = "block block-rounded",
@@ -29,6 +47,15 @@ cb_content_block <- function(title, subtitle, shadow = 5) {
     )
 }
 
+#' Title
+#'
+#' @param title
+#' @param side_button
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_project_block_demo <- function() {
     tags$div(
         class = "block block-rounded",
@@ -98,6 +125,15 @@ cb_project_block_demo <- function() {
     )
 }
 
+#' Title
+#'
+#' @param title
+#' @param side_button
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_muted_text <- function(...) {
     tags$span(
         class = 'text-muted',
@@ -105,6 +141,15 @@ cb_muted_text <- function(...) {
     )
 }
 
+#' Title
+#'
+#' @param title
+#' @param side_button
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_row <- function(...) {
     tags$div(
         class = 'row',
@@ -112,6 +157,15 @@ cb_row <- function(...) {
     )
 }
 
+#' Title
+#'
+#' @param title
+#' @param side_button
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_col <- function(width, ..., offset = 0) {
     col_class <- sprintf('col-%s', width)
     if (offset != 0) col_class <- sprintf('%s offset-%s',
@@ -122,16 +176,42 @@ cb_col <- function(width, ..., offset = 0) {
         ...
     )
 }
+
+
+#' @export
 cb_col1 <- function(...) { cb_col(1, ...) }
+
+#' @export
 cb_col2 <- function(...) { cb_col(2, ...) }
+
+#' @export
 cb_col3 <- function(...) { cb_col(3, ...) }
+
+#' @export
 cb_col4 <- function(...) { cb_col(4, ...) }
+
+#' @export
 cb_col5 <- function(...) { cb_col(5, ...) }
+
+#' @export
 cb_col6 <- function(...) { cb_col(6, ...) }
+
+#' @export
 cb_col7 <- function(...) { cb_col(7, ...) }
+
+#' @export
 cb_col8 <- function(...) { cb_col(8, ...) }
+
+#' @export
 cb_col9 <- function(...) { cb_col(9, ...) }
+
+#' @export
 cb_col10 <- function(...) { cb_col(10, ...) }
+
+#' @export
 cb_col11 <- function(...) { cb_col(11, ...) }
+
+#' @export
 cb_col12 <- function(...) { cb_col(12, ...) }
+
 

@@ -1,3 +1,12 @@
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_button <- function(id,
                       label = NULL,
                       icon = NULL,

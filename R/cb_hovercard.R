@@ -1,3 +1,12 @@
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_hovercard <- function(id, title, subtitle, icon = NULL,
                          bg_color = NULL) {
 
@@ -45,6 +54,15 @@ cb_hovercard <- function(id, title, subtitle, icon = NULL,
     )
 }
 
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_hovercard_placeholder <- function(id, title, subtitle, icon = NULL) {
     el <- cb_hovercard(id, title, subtitle, icon)
     print(el)

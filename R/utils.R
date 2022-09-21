@@ -1,3 +1,12 @@
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 add_css_class <- function(tag, class, selector = NULL) {
     if (!is.null(selector)) {
         htmltools::tagQuery(tag)$find(selector)$addClass(class)$allTags()
@@ -6,7 +15,14 @@ add_css_class <- function(tag, class, selector = NULL) {
     }
 }
 
-# this should error if the class is not found, but it is currently silent
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 remove_css_class <- function(tag, class, selector = NULL) {
     if (!is.null(selector)) {
         htmltools::tagQuery(tag)$find(selector)$removeClass(class)$allTags()
@@ -15,12 +31,28 @@ remove_css_class <- function(tag, class, selector = NULL) {
     }
 }
 
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 replace_css_class <- function(tag, old_class, new_class, selector = NULL) {
     tag %>%
         remove_css_class(old_class, selector) %>%
         add_css_class(new_class, selector)
 }
 
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 validate_icon <- function(icon) {
     if (is.character(icon)) {
         icon <- shiny::icon(icon)

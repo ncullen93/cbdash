@@ -1,3 +1,12 @@
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_modal_button <- function(id, label, dialog, hidden = FALSE) {
     btn <- cb_button(id, label)
     btn <- tagAppendAttributes(btn, 'data-bs-toggle' = 'modal', 'data-bs-target' = sprintf('#modal-%s',id))
@@ -5,10 +14,28 @@ cb_modal_button <- function(id, label, dialog, hidden = FALSE) {
     tagList(btn, dialog)
 }
 
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_launch_modal <- function(id) {
     shinyjs::click(id)
 }
 
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_modal_dialog <- function(id, title = NULL, ...) {
     btn <- cb_button(id, label=NULL)
     btn <- tagAppendAttributes(

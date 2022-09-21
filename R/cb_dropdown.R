@@ -1,3 +1,12 @@
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_dropdown <- function(id, label = NULL, icon = NULL, actions,
                         color = c('primary','secondary','success','info','warning','danger'),
                         alt = FALSE) {

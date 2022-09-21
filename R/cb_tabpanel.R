@@ -1,6 +1,14 @@
 
 
 
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_tabpanel <- function(..., options = NULL) {
     tabs <- list(...)
 
@@ -56,6 +64,14 @@ cb_tabpanel <- function(..., options = NULL) {
     )
 }
 
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_tab <- function(id, title, content) {
     cb_tab_title <- .cb_tab_title(id, title)
     cb_tab_content <- .cb_tab_content(id, content)
@@ -66,6 +82,14 @@ cb_tab <- function(id, title, content) {
     )
 }
 
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_tabpanel_options <- function(...) {
     tags$li(
         class = 'nav-item ms-auto',

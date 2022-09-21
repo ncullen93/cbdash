@@ -27,11 +27,10 @@ add_codebase_deps <- function(tag,
             'js/codebase.app.min.js',
             'js/plugins/chart.js/chart.min.js',
             'js/pages/be_pages_dashboard.min.js',
-            #'js/lib/jquery.min.js',
             'js/plugins/ion-rangeslider/js/ion.rangeSlider.min.js',
             'js/plugins/select2/js/select2.full.min.js',
             'js/plugins/nestable2/jquery.nestable.min.js',
-            'js/pages/be_comp_nestable.min.js', # not sure if needed
+            'js/pages/be_comp_nestable.min.js',
             'js/plugins/highlightjs/highlight.pack.min.js'
         ),
         stylesheet = stylesheet,

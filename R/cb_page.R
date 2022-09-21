@@ -1,3 +1,12 @@
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_page <- function(navbar, header = NULL, body, theme = c('none', 'corporate', 'earth',
                                             'elegance','flat','pulse')) {
 

@@ -1,7 +1,25 @@
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 is_button <- function(el) {
     (class(el)[1] == 'shiny.tag') & (el$name == 'button')
 }
 
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_navbar <- function(brand = NULL, user = NULL, menu, footer = NULL) {
     if (is_button(user)) {
         user <- add_css_class(
@@ -40,6 +58,15 @@ cb_navbar <- function(brand = NULL, user = NULL, menu, footer = NULL) {
     )
 }
 
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_navbar_brand <- function(title1 = NULL, title2 = NULL, icon=NULL) {
     tags$div(
         class = "content-header justify-content-lg-center bg-black-10",
@@ -64,6 +91,15 @@ cb_navbar_brand <- function(title1 = NULL, title2 = NULL, icon=NULL) {
     )
 }
 
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_navbar_footer <- function(...) {
     els <- list(...)
     el_width <- 75 / length(els)
@@ -78,6 +114,15 @@ cb_navbar_footer <- function(...) {
     els
 }
 
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_navbar_menu <- function(...) {
     navbar <- tags$ul(
         class = "nav-main",
@@ -99,6 +144,15 @@ cb_navbar_menu <- function(...) {
     navbar
 }
 
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_navbar_heading <- function(title) {
     tags$li(
         class = 'nav-main-heading',
@@ -106,6 +160,15 @@ cb_navbar_heading <- function(title) {
     )
 }
 
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_navbar_item <- function(id, title = NULL, icon=NULL) {
     if (!is.null(icon)) {
         icon <- add_css_class(

@@ -1,3 +1,12 @@
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_header <- function(...) {
     tags$header(
         id = "page-header",
@@ -24,6 +33,14 @@ cb_header <- function(...) {
 }
 
 
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_header_dropdown <- function(id, title, subtitle, options) {
     dropdown_options <- lapply(
         options,
