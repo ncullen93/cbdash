@@ -8,6 +8,7 @@ ui <- cb_page(
     navbar = cb_navbar(
         brand = cb_navbar_brand(
             'aba', 'Cloud', 'cloud'
+
         ),
         user = cb_button(
             id = 'btn_new_project',
