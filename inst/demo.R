@@ -141,8 +141,8 @@ ui <- cb_page(
                                                              icon_right = TRUE,
                                                               size='sm', color='success')),
             tags$div(
-                cb_project_block_demo(),
-                #cb_project_block(),
+                #cb_project_block_demo(),
+                cb_project_block(ids= c('testbtn_view','testbtn_archive'), title='test','xcsfds', '09/01'),
                 #cb_project_block()
             ),
             modals = list(
@@ -195,7 +195,7 @@ ui <- cb_page(
 
         ),
         cb_body_page(
-            id = 'page_analysis',
+            id = 'xx',
             cb_row(cb_col6(cb_card(title = 'Data',
                                    tags$div(
                                        cb_file_input('my_input',NULL)
@@ -206,29 +206,42 @@ ui <- cb_page(
             )
         ),
         cb_body_page(
-            id = 'stats',
+            id = 'page_analysis',
             cb_hovercard(id='my_hcard2', title='3 Active', subtitle='Domains', icon='globe'),
-            cb_tabpanel(
-                cb_tab('home','HOME',tagList(p('my home'))),
-                cb_tab('home2','HOME2',p('my home2')),
-                options = cb_tabpanel_options(
-                    cb_button(id = 'tabbtn1', icon='minus', color='secondary', alt=T),
-                    cb_button(id='tabbtn3', icon='plus', color='secondary', alt=T),
-                    cb_dropdown(
-                        id = 'mydropdown',
-                        label=NULL,
-                        icon = 'gear',
-                        actions = c('enable2', 'disable2', NA, 'do nothing2'),
-                        alt = TRUE,
-                        color = 'secondary'
-                    )
-                )
+            cb_pillpanel(
+                cb_tab('home','HOME',icon='box-archive opacity-50 me-1',
+                       cb_row(cb_col12(p('my home')))),
+                cb_tab('home2','HOME2',icon='th-large opacity-50 me-1',p('my home2'))
             )
         )
     )
 )
 
 server <- function(input, output, session) {
+
+    projects <- c('test','test2')
+
+    lapply(
+        projects,
+        function(p) {
+            observeEvent(
+                input[[paste0(p,'btn_view')]], {
+                    print(paste(p, ' view pressed'))
+                }
+            )
+            observeEvent(
+                input[[paste0(p,'btn_archive')]], {
+                    print(paste(p, ' archive pressed'))
+                }
+            )
+        }
+    )
+
+    #observeEvent(
+    #    input$project_block_view_test, {
+    #        print('view btn pressed')
+    #    }
+    #)
 
     observeEvent(
         input$button_id,

@@ -4,7 +4,7 @@
 \alias{cb_tabpanel}
 \title{Title}
 \usage{
-cb_tabpanel(..., options = NULL)
+cb_tabpanel(..., options = NULL, pills = FALSE)
 }
 \arguments{
 \item{...}{}

@@ -72,7 +72,8 @@ cb_project_block_demo <- function() {
 #' @export
 #'
 #' @examples
-cb_project_block <- function(title,
+cb_project_block <- function(ids,
+                             title,
                              description,
                              date_created) {
     tags$div(
@@ -123,23 +124,17 @@ cb_project_block <- function(title,
                 ),
                 tags$div(
                     class = "col-sm-6 py-4 text-md-end",
-                    tags$a(
+                    shiny::actionLink(
+                        inputId = ids[1],
                         class = "btn btn-sm btn-alt-primary me-2 my-1",
-                        href = "javascript:void(0)",
-                        tags$i(class = "fa fa-eye opacity-50 me-1"),
-                        "View"
+                        icon = shiny::icon('eye opacity-50 me-1'),
+                        'View'
                     ),
-                    tags$a(
-                        class = "btn btn-sm btn-alt-warning me-2 my-1",
-                        href = "javascript:void(0)",
-                        tags$i(class = "fa fa-copy opacity-50 me-1"),
-                        "Copy"
-                    ),
-                    tags$a(
+                    shiny::actionLink(
+                        inputId = ids[2],
                         class = "btn btn-sm btn-alt-danger me-2 my-1",
-                        href = "javascript:void(0)",
-                        tags$i(class = "fa fa-archive opacity-50 me-1"),
-                        "Archive"
+                        icon = shiny::icon('archive opacity-50 me-1'),
+                        'Archive'
                     )
                 )
             )
@@ -172,9 +167,12 @@ cb_muted_text <- function(...) {
 #' @export
 #'
 #' @examples
-cb_row <- function(...) {
+cb_row <- function(..., mb = 2) {
+    class <- 'row'
+    if (mb > 0) class <- paste0(class, ' mb-', mb)
+
     tags$div(
-        class = 'row',
+        class = class,
         ...
     )
 }

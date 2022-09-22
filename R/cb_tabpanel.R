@@ -1,4 +1,68 @@
 
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
+cb_pillpanel <- function(..., options = NULL) {
+    tabs <- list(...)
+
+    cb_tab_title_tags <- lapply(tabs, function(x) x[['title']])
+    cb_tab_content_tags <- lapply(tabs, function(x) x[['content']])
+
+    # make the first tab title active
+    cb_tab_title_tags[[1]] <- tagQuery(
+        cb_tab_title_tags[[1]]
+    )$find(
+        '.nav-link'
+    )$addClass(
+        'active'
+    )$removeAttrs(
+        'aria-selected'
+    )$addAttrs(
+        'aria-selected'='true'
+    )$addAttrs(
+        'tabindex'='0'
+    )$allTags()
+
+    # make the first tab content active
+    cb_tab_content_tags[[1]] <- tagQuery(
+        cb_tab_content_tags[[1]]
+    )$addClass(
+        'active show'
+    )$removeAttrs(
+        'tabindex'
+    )$addAttrs(
+        'tabindex' = '0'
+    )$allTags()
+
+
+    tabpanel_header <- tags$ul(
+        class = "nav nav-pills justify-content-center space-x-1",
+        role = "tablist",
+        cb_tab_title_tags
+    )
+
+    tabpanel_header <- tags$div(
+        class = "px-4 py-3 bg-body-extra-light rounded push",
+        tabpanel_header
+    )
+
+
+    tagList(
+        tabpanel_header,
+        tags$div(
+            class = "block block-rounded overflow-hidden",
+            tags$div(
+                class = "block-content tab-content",
+                cb_tab_content_tags
+            )
+        )
+    )
+}
 
 
 #' Title
@@ -9,7 +73,7 @@
 #' @export
 #'
 #' @examples
-cb_tabpanel <- function(..., options = NULL) {
+cb_tabpanel <- function(..., options = NULL, pills = FALSE) {
     tabs <- list(...)
 
     cb_tab_title_tags <- lapply(tabs, function(x) x[['title']])
@@ -46,6 +110,7 @@ cb_tabpanel <- function(..., options = NULL) {
         role = "tablist",
         cb_tab_title_tags
     )
+
     if (!is.null(options)) {
         # add options
         tabpanel_header <- tagAppendChild(
@@ -72,8 +137,8 @@ cb_tabpanel <- function(..., options = NULL) {
 #' @export
 #'
 #' @examples
-cb_tab <- function(id, title, content) {
-    cb_tab_title <- .cb_tab_title(id, title)
+cb_tab <- function(id, title, content, icon = NULL) {
+    cb_tab_title <- .cb_tab_title(id, title, icon)
     cb_tab_content <- .cb_tab_content(id, content)
 
     list(
@@ -100,7 +165,9 @@ cb_tabpanel_options <- function(...) {
     )
 }
 
-.cb_tab_title <- function(id, title) {
+.cb_tab_title <- function(id, title, icon = NULL) {
+    if (!is.null(icon)) icon <- validate_icon(icon)
+
     tags$li(
         class = "nav-item",
         role = "presentation",
@@ -113,6 +180,7 @@ cb_tabpanel_options <- function(...) {
             `aria-controls` = sprintf("btabs-static-%s", id),
             `aria-selected` = "false",
             tabindex = "-1",
+            icon,
             title
         )
     )
