@@ -41,8 +41,8 @@ cb_body <- function(...) {
 #' @export
 #'
 #' @examples
-cb_activate_body_page <- function(id) {
-    shinyjs::click(paste0('nav-link-',id))
+cb_activate_body_page <- function(id, asis = TRUE) {
+    shinyjs::click(paste0('nav-link-',id), asis=asis)
 }
 
 #' Title

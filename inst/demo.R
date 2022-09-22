@@ -2,6 +2,22 @@ devtools::load_all()
 library(shiny)
 library(htmltools)
 library(shinyjs)
+library(tidyverse)
+library(reactable)
+
+project_df <- data.frame(
+    user = 'nickcullen',
+    name = c('project1', 'project2'),
+    description = c('my first project', 'my second project'),
+    date_created = c('09/21/2022', '09/22/2022')
+    #date_last_updated <- c('09/21/2022', '09/23/2022')
+)
+
+#project_df <- project_df %>%
+#    mutate(
+#        serial_no = row_number(),
+#        actionable = glue('<button id="custom_btn" onclick="Shiny.onInputChange(\'button_id\', \'{serial_no}\')">Click</button>')
+#    )
 
 ui <- cb_page(
     theme = 'flat',
@@ -49,6 +65,21 @@ ui <- cb_page(
     body = cb_body(
         cb_body_page(
             id = 'page_home',
+            cb_row(
+                cb_col12(
+                    # table output for "projects_df"
+                    cb_card(
+                        title = 'All projects',
+                        shiny::tableOutput('mytable')
+                    ),
+                    cb_card(
+                        title = 'All projects',
+                        DT::DTOutput('mytable2')
+                    ),
+                    cb_content_heading('All projects'),
+                    reactable::reactableOutput('mytable3')
+                )
+            ),
             cb_row(
                 cb_col8(
                     cb_content_block(title = 'Welcome to aba Cloud',
@@ -198,6 +229,47 @@ ui <- cb_page(
 )
 
 server <- function(input, output, session) {
+
+    observeEvent(
+        input$button_id,
+        {
+            print('btn 1 pressed')
+            print(input$button_id)
+        }
+    )
+
+    output$mytable <- renderTable(
+        {
+            project_df
+        },
+        width = '100%',
+        striped = TRUE,
+        spacing = 'l'
+    )
+
+    output$mytable2 <- DT::renderDT(
+        {
+            project_df
+        },
+        width = '100%',
+        class = 'display table',
+        rownames = FALSE,
+        escape = FALSE,
+        options = list(
+            searching = FALSE
+        )
+    )
+
+    output$mytable3 <- reactable::renderReactable(
+        {
+            reactable(
+                project_df, resizable = TRUE, showPageInfo = FALSE, selection = "single",
+                onClick = "select", borderless = TRUE, striped = TRUE, highlight = TRUE,
+                theme =  reactableTheme(borderColor = "#dfe2e5", stripedColor = "#f6f8fa",
+                                        highlightColor = "#f0f5f9", cellPadding = "20px 10px")
+            )
+        }
+    )
 
     observeEvent(
         input$btn_new_project, {

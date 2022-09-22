@@ -4,7 +4,7 @@
 \alias{cb_activate_body_page}
 \title{Title}
 \usage{
-cb_activate_body_page(id)
+cb_activate_body_page(id, asis = TRUE)
 }
 \arguments{
 \item{...}{}
