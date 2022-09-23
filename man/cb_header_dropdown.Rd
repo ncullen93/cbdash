@@ -4,7 +4,7 @@
 \alias{cb_header_dropdown}
 \title{Title}
 \usage{
-cb_header_dropdown(id, title, subtitle, options)
+cb_header_dropdown(id, title, subtitle = NULL, options, reactive = FALSE)
 }
 \arguments{
 \item{...}{}

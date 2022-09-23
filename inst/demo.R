@@ -50,19 +50,19 @@ ui <- cb_page(
             # hidden pages
             shinyjs::hidden(cb_navbar_item('page_new_project')),
             shinyjs::hidden(cb_navbar_item('page_view_project'))
-        ),
-        footer = cb_navbar_footer(
-            cb_button(id = 'page_user', icon='user', color='info', alt=T, size='sm'),
-            cb_button(id = 'page_settings', icon='gear', color='info', alt=T, size='sm'),
-            cb_button(id='page_help', icon='question', color='info', alt=T, size='sm')
         )
+        #footer = cb_navbar_footer(
+        #    #cb_button(id = 'page_user', icon='user', color='info', alt=T, size='sm'),
+        #    #cb_button(id = 'page_settings', icon='gear', color='info', alt=T, size='sm'),
+        #   # cb_button(id='page_help', icon='question', color='info', alt=T, size='sm')
+        #)
     ),
     header = cb_header(
         cb_header_dropdown(
             id = 'project_dd',
-            title = 'No active project',
-            subtitle = 'Recent projects',
-            options = c('New Project (1)', 'New Project (2)', 'New Project (3)')
+            title = 'header_title',
+            options = c('Profile', 'Settings', 'Logout'),
+            reactive = TRUE
         )
     ),
     body = cb_body(
@@ -228,15 +228,40 @@ ui <- cb_page(
 server <- function(input, output, session) {
 
     user <- cb_login_server()
+    #user <- reactive({'nickcullen31@gmail.com'})#
+
+    output$header_title <- shiny::renderText({
+        user()$email
+    })
+
+    observeEvent(
+        input$Logout, {
+            print('signing out')
+            user()$logout()
+        }
+    )
 
     observeEvent(
         user(),
         {
             print('here')
             print(user())
+            print(names(input))
         }
     )
 
+
+    observeEvent(
+        input$Profile, {
+            print('profile clicked')
+        }
+    )
+
+    observeEvent(
+        input$Settings, {
+            print('Settings clicked')
+        }
+    )
    # f <- firebase::FirebaseSocial$new()
    # f2 <- firebase::FirebaseEmailPassword$new()
 #

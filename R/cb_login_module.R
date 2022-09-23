@@ -10,7 +10,7 @@
 #' @examples
 cb_login_ui <- function(id = 'login'){
     ns <- NS(id)
-    cb_login_modal(
+    cb_login_news_modal(
         id = 'login_modal',
         title = 'Please sign in',
         background_color = '#e4e7ed',
@@ -23,11 +23,12 @@ cb_login_ui <- function(id = 'login'){
         cb_password_input(ns('password'),'Password', floating=T, width = '100%'),
         cb_row(
             cb_col6(
-                cb_button(ns("signin_account_email"), "Sign in", icon = "envelope",
+                cb_button(ns("signin_account_email"), "Log in",
                           color = 'info', width='100%'),
             ),
             cb_col6(
                 cb_button(ns("create_account_email"), "Create", icon = "user",
+                          icon_right = TRUE,
                           color = 'success', width='100%')
             )
         ),
@@ -41,7 +42,7 @@ cb_login_ui <- function(id = 'login'){
 
         ),
         footer = tags$div(
-            shiny::actionLink(ns('forgot_password'), 'Forgot Password')
+            shiny::actionLink(ns('forgot_password'), 'Forgot Password?')
         )
     )
 
@@ -128,6 +129,7 @@ cb_login_server <- function(id = 'login'){
                     r$active_error <- TRUE
                     r$error_message <- 'Please enter a valid email address'
                 } else {
+                    r$active_error <- FALSE
                     f$create(input$email, input$password)
                 }
             }
@@ -150,7 +152,19 @@ cb_login_server <- function(id = 'login'){
           r$new_account <- TRUE
         })
 
+        signout_fn <- function() {
+            # sign the user out from firebase
+            f$sign_out()
 
+            # clear all inputs from the login modal
+
+
+            # show the login modal again
+            cb_show_modal(id = 'login_modal', asis=T)
+            updateTextInput(inputId = ns('email'), value = '')
+            updateTextInput(inputId = ns('password'), value = '')
+
+        }
         # if signed in
         # then hide dialog
         observeEvent(
@@ -162,7 +176,10 @@ cb_login_server <- function(id = 'login'){
                     'uid',
                     'email'
                 )]
+                r$user$logout <- signout_fn
 
+                r$active_error <- FALSE
+                r$active_success <- FALSE
                 shinyjs::click(id = 'login_modal_close', asis=TRUE)
             }
         )

@@ -41,18 +41,32 @@ cb_header <- function(...) {
 #' @export
 #'
 #' @examples
-cb_header_dropdown <- function(id, title, subtitle, options) {
+cb_header_dropdown <- function(id, title, subtitle = NULL, options, reactive=FALSE) {
     dropdown_options <- lapply(
         options,
         function(option) {
-            tags$a(
-                class = "dropdown-item d-flex align-items-center justify-content-between space-x-1",
-                href = "#",
-                tags$span(option)
-                #tags$i(class = "fa fa-fw fa-user opacity-25")
-            )
+            shiny::actionLink(
+                option,
+                option
+            ) %>%
+                tagAppendAttributes(
+                    class = 'dropdown-item d-flex align-items-center justify-content-between space-x-1'
+                )
         }
     )
+
+    if (reactive) title <- shiny::uiOutput(title)
+
+    if (!is.null(subtitle)) {
+        subtitle <- tags$div(
+            class = "px-2 py-3 bg-body-light rounded-top",
+            tags$h5(
+                class = "h6 text-center mb-0",
+                subtitle
+            )
+        )
+    }
+
     tags$div(
         class = "dropdown d-inline-block",
         id = id,
@@ -73,23 +87,10 @@ cb_header_dropdown <- function(id, title, subtitle, options) {
         tags$div(
             class = "dropdown-menu dropdown-menu-md dropdown-menu-end p-0",
             `aria-labelledby` = "page-header-user-dropdown",
-            tags$div(
-                class = "px-2 py-3 bg-body-light rounded-top",
-                tags$h5(
-                    class = "h6 text-center mb-0",
-                    subtitle
-                )
-            ),
+            subtitle,
             tags$div(
                 class = "p-2",
-                dropdown_options,
-                tags$a(
-                    style ='font-weight: 500',
-                    class = "dropdown-item d-flex align-items-center justify-content-between space-x-1",
-                    href = "#",
-                    tags$b('View all')
-                    #tags$i(class = "fa fa-fw fa-user opacity-25")
-                )
+                dropdown_options
             )
         )
     )

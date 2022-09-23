@@ -221,3 +221,130 @@ cb_login_modal <- function(id, title = NULL, ...,
         btn, btn_close, modal
     )
 }
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
+cb_login_news_modal <- function(id, title = NULL, ...,
+                           footer = NULL,
+                           brand = NULL,
+                           header = NULL,
+                           background_color = NULL) {
+    btn <- cb_button(paste0(id,'_show'), label=NULL)
+    btn <- tagAppendAttributes(
+        btn,
+        'data-bs-toggle' = 'modal',
+        'data-bs-target' = sprintf('#modal-%s',id)
+    )
+    btn <- btn %>% shinyjs::hidden()
+
+    btn_close <- cb_button(paste0(id,'_close'), label = NULL)
+    btn_close <- tagAppendAttributes(
+        btn_close,
+        'data-bs-dismiss'="modal",
+        'data-bs-target' = sprintf('#modal-%s',id),
+        'aria-label'="Close"
+    )
+    btn_close <- btn_close %>% shinyjs::hidden()
+
+    above_content <- tags$div(
+        class = "py-4 text-center",
+        tags$a(
+            class = "link-fx fw-bold",
+            href = "#",
+            tags$i(class = "fa fa-fire"),
+            tags$span(
+                class = "fs-4 text-body-color",
+                brand[1]
+            ),
+            tags$span(
+                class = "fs-4",
+                brand[2]
+            )
+        ),
+        tags$h1(
+            class = "h3 fw-bold mt-4 mb-2",
+            header[1]
+        ),
+        tags$h2(
+            class = "h5 fw-medium text-muted mb-0",
+            header[2]
+        )
+    )
+
+    modal <- tags$div(
+        class = "modal",
+        style = glue::glue('background-color: {background_color}'),
+        id = sprintf("modal-%s",id),
+        tabindex = "-1",
+        role = "dialog",
+        `aria-labelledby` = sprintf("modal-%s",id),
+        `aria-hidden` = "true",
+        'data-bs-keyboard'="false",
+        'data-bs-backdrop'="static",
+        tags$div(
+            class = "modal-dialog modal-xl",
+            role = "document",
+            tags$div(
+                class = "modal-content",
+                above_content,
+                tags$div(
+                    class = "block block-rounded shadow-none mb-2",
+                    style = 'width: 70%; margin: 0 auto;
+                    box-shadow: 0 0 25px #ccc !important;',
+                    tags$div(
+                        class = "block-header block-header-default bg-gd-dusk",
+                        tags$h3(
+                            class = "block-title",
+                            style = 'color: white',
+                            title
+                        )
+                    ),
+                    # begin content
+                    tags$div(
+                        class = "block-content fs-sm mb-2",
+                        cb_row(
+                            cb_col6(
+                                style = 'padding-right: 30px; padding-left: 30px;
+                                border-right: 1px solid #e4e7ed;',
+                                ...
+                            ),
+                            cb_col6(
+                                style = 'padding-right: 30px; padding-left: 30px;',
+                                tags$div(
+                                    cb_content_heading('Latest News') %>%
+                                        tagAppendAttributes(class='pt-0 mb-0',
+                                                            style='color: #0891b2;
+                                                            border-bottom: none;'),
+                                    span(tags$b('Launch'),br(),'The aba Online application
+                                    launched to the public on 10/23/2022'),
+                                    br(), br(),
+                                    span(tags$b('Stats App Available'),br(),'The statistics
+                                         app is now available for everyone.'),
+                                    br(), br(),
+                                    span(tags$b('Code Export Integration'),br(),'An integration
+                                         that allows you to export code from models..')
+                                )
+                            )
+                        )
+
+                    ),
+                    ## end content
+                    tags$div(
+                        class = "block-content block-content-full block-content-sm  border-top",
+                        footer
+                    )
+                )
+            )
+        )
+    )
+
+    tagList(
+        btn, btn_close, modal
+    )
+}
