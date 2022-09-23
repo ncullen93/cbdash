@@ -7,10 +7,39 @@
 #' @export
 #'
 #' @examples
-cb_page <- function(navbar, header = NULL, body, theme = c('none', 'corporate', 'earth',
-                                            'elegance','flat','pulse')) {
+cb_page <- function(navbar, header = NULL, body, dependencies = NULL,
+                    use_signin = FALSE, signin_ui = NULL,
+                    theme = c('none', 'corporate', 'earth', 'elegance','flat','pulse')) {
 
     if (is.null(header)) header <- cb_header()
+
+
+    body_tags <- tagList(
+        navbar,
+        header,
+        body
+    )
+
+    if (use_signin) {
+        body_tags <- firebase::reqSignin(
+            body_tags
+        )
+    }
+
+    body_tags <- tags$div(
+        id="page-container",
+        class="sidebar-o sidebar-dark enable-page-overlay side-scroll
+                           page-header-modern main-content-boxed",
+        body_tags
+    )
+
+   # if (is.null(signin_ui)) signin_ui <- firebase::firebaseUIContainer()
+   if (use_signin) {
+       body_tags <- tagList(
+           signin_ui,
+           body_tags
+       )
+   }
 
     tagList(
         tags$head(
@@ -25,18 +54,14 @@ cb_page <- function(navbar, header = NULL, body, theme = c('none', 'corporate', 
                 href = NULL,
                 type="image/x-icon"
             ),
-            shinyjs::useShinyjs()
+            shinyjs::useShinyjs(),
+            tagList(
+                dependencies
+            )
         ),
         add_dependencies(
             tags$body(
-                tags$div(
-                    id="page-container",
-                    class="sidebar-o sidebar-dark enable-page-overlay side-scroll
-                           page-header-modern main-content-boxed",
-                    navbar,
-                    header,
-                    body
-                )
+                body_tags
             ),
             c(
                 'cbdash',

@@ -23,8 +23,32 @@ cb_modal_button <- function(id, label, dialog, hidden = FALSE) {
 #' @export
 #'
 #' @examples
-cb_launch_modal <- function(id) {
-    shinyjs::click(id)
+cb_launch_modal <- function(id, asis = TRUE) {
+    shinyjs::click(id, asis = asis)
+}
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
+cb_show_modal <- function(id, asis = TRUE) {
+    shinyjs::click(id, asis = asis)
+}
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
+cb_hide_modal <- function(id, asis = TRUE) {
+    shinyjs::click(id, asis = asis)
 }
 
 
@@ -37,13 +61,13 @@ cb_launch_modal <- function(id) {
 #'
 #' @examples
 cb_modal_dialog <- function(id, title = NULL, ...) {
-    btn <- cb_button(id, label=NULL)
-    btn <- tagAppendAttributes(
-        btn,
-        'data-bs-toggle' = 'modal',
-        'data-bs-target' = sprintf('#modal-%s',id)
-    )
-    btn <- btn %>% shinyjs::hidden()
+   btn <- cb_button(id, label=NULL)
+   btn <- tagAppendAttributes(
+       btn,
+       'data-bs-toggle' = 'modal',
+       'data-bs-target' = sprintf('#modal-%s',id)
+   )
+   btn <- btn %>% shinyjs::hidden()
 
     modal <- tags$div(
         class = "modal",
@@ -105,5 +129,75 @@ cb_modal_dialog <- function(id, title = NULL, ...) {
 
     tagList(
         btn, modal
+    )
+}
+
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
+cb_login_dialog <- function(id, title = NULL, ...,
+                            footer = NULL,
+                            background_color = NULL) {
+    btn <- cb_button(id, label=NULL)
+    btn <- tagAppendAttributes(
+        btn,
+        'data-bs-toggle' = 'modal',
+        'data-bs-target' = sprintf('#modal-%s',id)
+    )
+    btn <- btn %>% shinyjs::hidden()
+
+    btn_close <- cb_button(paste0(id,'_close'), label = NULL)
+    btn_close <- tagAppendAttributes(
+        btn_close,
+        'data-bs-dismiss'="modal",
+        'data-bs-target' = sprintf('#modal-%s',id),
+        'aria-label'="Close"
+    )
+    btn_close <- btn_close %>% shinyjs::hidden()
+
+    modal <- tags$div(
+        class = "modal",
+        style = glue::glue('background-color: {background_color}'),
+        id = sprintf("modal-%s",id),
+        tabindex = "-1",
+        role = "dialog",
+        `aria-labelledby` = sprintf("modal-%s",id),
+        `aria-hidden` = "true",
+        tags$div(
+            class = "modal-dialog modal-dialog-centered modal-sm",
+            role = "document",
+            tags$div(
+                class = "modal-content",
+                tags$div(
+                    class = "block block-rounded shadow-none mb-4",
+                    tags$div(
+                        class = "block-header block-header-default",
+                        tags$h3(
+                            class = "block-title",
+                            title
+                        )
+                    ),
+                    # begin content
+                    tags$div(
+                        class = "block-content fs-sm mb-4",
+                        ...,
+                    ),
+                    ## end content
+                    tags$div(
+                        class = "block-content block-content-full block-content-sm text-end border-top",
+                        footer
+                    )
+                )
+            )
+        )
+    )
+
+    tagList(
+        btn, btn_close, modal
     )
 }

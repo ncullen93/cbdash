@@ -19,7 +19,11 @@ project_df <- data.frame(
 #        actionable = glue('<button id="custom_btn" onclick="Shiny.onInputChange(\'button_id\', \'{serial_no}\')">Click</button>')
 #    )
 
+
 ui <- cb_page(
+    use_signin = T,
+    signin_ui = cb_login_ui(),
+    dependencies = list(firebase::useFirebase()),
     theme = 'flat',
     navbar = cb_navbar(
         brand = cb_navbar_brand(
@@ -219,23 +223,49 @@ ui <- cb_page(
 
 server <- function(input, output, session) {
 
+    user <- cb_login_server()
+
+   # f <- firebase::FirebaseSocial$new()
+   # f2 <- firebase::FirebaseEmailPassword$new()
+#
+   # cb_launch_modal(id = 'login')
+#
+   # observeEvent(
+   #     input$google, {
+   #         print('here')
+   #         f$launch_google()
+   #     }
+   # )
+#
+   # observeEvent(
+   #     input$signin_account_email, {
+   #         f2$sign_in(input$email, input$password)
+   #     }
+   # )
+#
+   # observeEvent(
+   #     input$create_account_email, {
+   #         f2$create(input$email, input$password)
+   #     }
+   # )
+
     projects <- c('test','test2')
 
-    lapply(
-        projects,
-        function(p) {
-            observeEvent(
-                input[[paste0(p,'btn_view')]], {
-                    print(paste(p, ' view pressed'))
-                }
-            )
-            observeEvent(
-                input[[paste0(p,'btn_archive')]], {
-                    print(paste(p, ' archive pressed'))
-                }
-            )
-        }
-    )
+    #lapply(
+    #    projects,
+    #    function(p) {
+    #        observeEvent(
+    #            input[[paste0(p,'btn_view')]], {
+    #                print(paste(p, ' view pressed'))
+    #            }
+    #        )
+    #        observeEvent(
+    #            input[[paste0(p,'btn_archive')]], {
+    #                print(paste(p, ' archive pressed'))
+    #            }
+    #        )
+    #    }
+    #)
 
     #observeEvent(
     #    input$project_block_view_test, {
