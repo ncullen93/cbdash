@@ -21,8 +21,7 @@ project_df <- data.frame(
 
 
 ui <- cb_page(
-    use_signin = T,
-    signin_ui = cb_login_ui(),
+    auth_ui = cb_login_ui(),
     dependencies = list(firebase::useFirebase()),
     theme = 'flat',
     navbar = cb_navbar(
@@ -386,7 +385,7 @@ server <- function(input, output, session) {
 
     observeEvent(
         input$launch_modal, {
-            cb_launch_modal(id = 'test_modal')
+            cb_show_modal(id = 'test_modal')
         }
     )
 

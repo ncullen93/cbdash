@@ -9,10 +9,15 @@
 #' @importFrom shiny NS tagList
 cb_login_ui <- function(id = 'login'){
     ns <- NS(id)
-    cb_login_dialog(
+    cb_login_modal(
         id = 'login_modal',
-        title = 'Please login',
-        #background_color = 'white',
+        title = 'Login',
+        background_color = '#e4e7ed',
+        brand = c('aba', 'online'),
+        header = c(
+            'Welcome to the ABA online application',
+            'We make stats {relatively} fun for everyone!'
+        ),
         cb_text_input(ns('email'),'Email', floating=T, width = '100%'),
         cb_text_input(ns('password'),'Password', floating=T, width = '100%'),
         cb_row(
@@ -36,13 +41,14 @@ cb_login_ui <- function(id = 'login'){
         #    cb_col12(
         #        cb_button(ns("demo"), "Try a demo", icon = "user-lock",color='primary', width='100%')
         #    )
-#
+        #
         #),
 
         footer = tags$div(
             shiny::actionLink('xx', 'Forgot Password')
         )
     )
+
 }
 
 #' login Server Functions

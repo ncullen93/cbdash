@@ -7,12 +7,11 @@
 #' @export
 #'
 #' @examples
-cb_page <- function(navbar, header = NULL, body, dependencies = NULL,
-                    use_signin = FALSE, signin_ui = NULL,
+cb_page <- function(navbar, header = NULL, body, auth_ui = NULL, dependencies = NULL,
                     theme = c('none', 'corporate', 'earth', 'elegance','flat','pulse')) {
 
     if (is.null(header)) header <- cb_header()
-
+    use_signin <- !is.null(auth_ui)
 
     body_tags <- tagList(
         navbar,
@@ -33,10 +32,9 @@ cb_page <- function(navbar, header = NULL, body, dependencies = NULL,
         body_tags
     )
 
-   # if (is.null(signin_ui)) signin_ui <- firebase::firebaseUIContainer()
    if (use_signin) {
        body_tags <- tagList(
-           signin_ui,
+           auth_ui,
            body_tags
        )
    }

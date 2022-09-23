@@ -14,19 +14,6 @@ cb_modal_button <- function(id, label, dialog, hidden = FALSE) {
     tagList(btn, dialog)
 }
 
-
-#' Title
-#'
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
-cb_launch_modal <- function(id, asis = TRUE) {
-    shinyjs::click(id, asis = asis)
-}
-
 #' Title
 #'
 #' @param ...
@@ -36,7 +23,7 @@ cb_launch_modal <- function(id, asis = TRUE) {
 #'
 #' @examples
 cb_show_modal <- function(id, asis = TRUE) {
-    shinyjs::click(id, asis = asis)
+    shinyjs::click(paste0(id,'_show'), asis = asis)
 }
 
 #' Title
@@ -48,7 +35,7 @@ cb_show_modal <- function(id, asis = TRUE) {
 #'
 #' @examples
 cb_hide_modal <- function(id, asis = TRUE) {
-    shinyjs::click(id, asis = asis)
+    shinyjs::click(id = paste0(id,'_hide'), asis=asis)
 }
 
 
@@ -61,7 +48,7 @@ cb_hide_modal <- function(id, asis = TRUE) {
 #'
 #' @examples
 cb_modal_dialog <- function(id, title = NULL, ...) {
-   btn <- cb_button(id, label=NULL)
+   btn <- cb_button(paste0(id,'_show'), label=NULL)
    btn <- tagAppendAttributes(
        btn,
        'data-bs-toggle' = 'modal',
@@ -140,10 +127,12 @@ cb_modal_dialog <- function(id, title = NULL, ...) {
 #' @export
 #'
 #' @examples
-cb_login_dialog <- function(id, title = NULL, ...,
+cb_login_modal <- function(id, title = NULL, ...,
                             footer = NULL,
+                            brand = NULL,
+                            header = NULL,
                             background_color = NULL) {
-    btn <- cb_button(id, label=NULL)
+    btn <- cb_button(paste0(id,'_show'), label=NULL)
     btn <- tagAppendAttributes(
         btn,
         'data-bs-toggle' = 'modal',
@@ -160,6 +149,31 @@ cb_login_dialog <- function(id, title = NULL, ...,
     )
     btn_close <- btn_close %>% shinyjs::hidden()
 
+    above_content <- tags$div(
+        class = "py-4 text-center",
+        tags$a(
+            class = "link-fx fw-bold",
+            href = "#",
+            tags$i(class = "fa fa-fire"),
+            tags$span(
+                class = "fs-4 text-body-color",
+                brand[1]
+            ),
+            tags$span(
+                class = "fs-4",
+                brand[2]
+            )
+        ),
+        tags$h1(
+            class = "h3 fw-bold mt-4 mb-2",
+            header[1]
+        ),
+        tags$h2(
+            class = "h5 fw-medium text-muted mb-0",
+            header[2]
+        )
+    )
+
     modal <- tags$div(
         class = "modal",
         style = glue::glue('background-color: {background_color}'),
@@ -168,13 +182,17 @@ cb_login_dialog <- function(id, title = NULL, ...,
         role = "dialog",
         `aria-labelledby` = sprintf("modal-%s",id),
         `aria-hidden` = "true",
+        'data-bs-keyboard'="false",
+        'data-bs-backdrop'="static",
         tags$div(
-            class = "modal-dialog modal-dialog-centered modal-sm",
+            class = "modal-dialog modal-dialog-centered",
             role = "document",
             tags$div(
                 class = "modal-content",
+                above_content,
                 tags$div(
                     class = "block block-rounded shadow-none mb-4",
+                    style = 'width: 350px; margin: 0 auto;',
                     tags$div(
                         class = "block-header block-header-default",
                         tags$h3(
