@@ -41,7 +41,7 @@ cb_login_ui <- function(id = 'login'){
 
         ),
         footer = tags$div(
-            shiny::actionLink('xx', 'Forgot Password')
+            shiny::actionLink(ns('forgot_password'), 'Forgot Password')
         )
     )
 
@@ -128,7 +128,6 @@ cb_login_server <- function(id = 'login'){
                     r$active_error <- TRUE
                     r$error_message <- 'Please enter a valid email address'
                 } else {
-                    r$active_error <- FALSE
                     f$create(input$email, input$password)
                 }
             }
@@ -165,6 +164,26 @@ cb_login_server <- function(id = 'login'){
                 )]
 
                 shinyjs::click(id = 'login_modal_close', asis=TRUE)
+            }
+        )
+
+        # if forgot password
+        # then send password reset to email
+        observeEvent(
+            input$forgot_password, {
+                user_email <- input$email
+                if (!is_valid_email(user_email)) {
+                    r$active_error <- TRUE
+                    r$active_success <- FALSE
+                    r$error_message <- paste('Please enter a valid email to reset your password')
+                } else {
+                    r$active_error <- FALSE
+                    r$active_success <- TRUE
+                    r$success_message <- 'Password reset link was sent to email'
+                    print('click resetting password')
+                    print(user_email)
+                    f$reset_password(user_email)
+                }
             }
         )
 
