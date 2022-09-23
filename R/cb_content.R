@@ -83,6 +83,7 @@ cb_project_block <- function(ids,
             style = "box-shadow: 0 0 2px #ccc;",
             tags$div(
                 class = "row align-items-center",
+                style = "text-align: left;",
                 tags$div(
                     class = "col-sm-6 py-4",
                     tags$h3(

@@ -145,7 +145,12 @@ ui <- cb_page(
                                                               size='sm', color='success')),
             tags$div(
                 #cb_project_block_demo(),
-                cb_project_block(ids= c('testbtn_view','testbtn_archive'), title='test','xcsfds', '09/01'),
+                shinycssloaders::withSpinner(
+                    cb_project_block(ids= c('testbtn_view','testbtn_archive'), title='test','xcsfds', '09/01'),
+                    image.height='300px',
+                    proxy.height = '150px'
+                )
+
                 #cb_project_block()
             ),
             modals = list(

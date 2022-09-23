@@ -191,19 +191,20 @@ cb_login_modal <- function(id, title = NULL, ...,
                 class = "modal-content",
                 above_content,
                 tags$div(
-                    class = "block block-rounded shadow-none mb-4",
+                    class = "block block-rounded shadow-none mb-2",
                     style = 'width: 350px; margin: 0 auto;
                     box-shadow: 0 0 25px #ccc !important;',
                     tags$div(
-                        class = "block-header block-header-default",
+                        class = "block-header block-header-default bg-gd-dusk",
                         tags$h3(
                             class = "block-title",
+                            style = 'color: white',
                             title
                         )
                     ),
                     # begin content
                     tags$div(
-                        class = "block-content fs-sm mb-4",
+                        class = "block-content fs-sm mb-2",
                         ...,
                     ),
                     ## end content

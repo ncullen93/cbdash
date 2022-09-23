@@ -1,19 +1,18 @@
 
 
-#' login UI Function
+#' Title
 #'
-#' @description A shiny Module.
+#' @param id
 #'
-#' @param id,input,output,session Internal parameters for {shiny}.
+#' @return
+#' @export
 #'
-#' @noRd
-#'
-#' @importFrom shiny NS tagList
+#' @examples
 cb_login_ui <- function(id = 'login'){
     ns <- NS(id)
     cb_login_modal(
         id = 'login_modal',
-        title = 'Login',
+        title = 'Please sign in',
         background_color = '#e4e7ed',
         brand = c('aba', 'online'),
         header = c(
@@ -48,9 +47,14 @@ cb_login_ui <- function(id = 'login'){
 
 }
 
-#' login Server Functions
+#' Title
 #'
-#' @noRd
+#' @param id
+#'
+#' @return
+#' @export
+#'
+#' @examples
 cb_login_server <- function(id = 'login'){
     moduleServer( id, function(input, output, session){
         ns <- session$ns
