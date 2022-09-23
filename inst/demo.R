@@ -232,7 +232,7 @@ server <- function(input, output, session) {
     observeEvent(
         user(),
         {
-            print('im logged in!')
+            print('here')
             print(user())
         }
     )

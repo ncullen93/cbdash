@@ -64,13 +64,13 @@ cb_login_server <- function(id = 'login'){
         # return user login info from this module
         # require user to accept terms when creating account
 
-        r <- reactiveValues(user = NULL,
-                            new_account = FALSE)
-        #f <- firebase::FirebaseSocial$new()
+        r <- reactiveValues(new_account = FALSE,
+                            user = NULL)
+
+        f_google <- firebase::FirebaseSocial$new()
         f <- firebase::FirebaseEmailPassword$new()
 
         cb_show_modal(id = 'login_modal', asis=T)
-
 
         output$error_ui <- renderUI({
             req(r$active_error)
@@ -83,24 +83,40 @@ cb_login_server <- function(id = 'login'){
         output$success_ui <- renderUI({
             req(r$active_success)
             tags$span(
-                style = 'color: darkgreen;',
+                style = 'color: green;',
                 r$success_message
             )
         })
 
         # if google button pressed
         # then launch google signin
-        #observeEvent(
-        #    input$google, {
-        #        f$launch_google()
-        #    }
-        #)
+        observeEvent(
+            input$google, {
+                f_google$launch_google()
+            }
+        )
 
         # if sign-in button pressed
         # then launch email signin
         observeEvent(
             input$signin_account_email, {
                 f$sign_in(input$email, input$password)
+            }
+        )
+
+        # if sign in failed
+        # then notify user
+        observeEvent(
+            input$fireblaze_signed_up_user, {
+                if (!is.null(input$fireblaze_signed_up_user$response$code)) {
+                    r$active_error <- TRUE
+                    r$error_message <- paste('Error logging in:',
+                                             input$fireblaze_signed_up_user$response$code)
+                } else {
+                    r$active_error <- FALSE
+                    r$active_success <- TRUE
+                    r$success_message <- 'Authorization successful. Logging in...'
+                }
             }
         )
 
@@ -121,7 +137,7 @@ cb_login_server <- function(id = 'login'){
         # check if creation sucessful
         observeEvent(f$get_created(), {
           created <- f$get_created()
-#
+
           if (!created$success) {
               r$active_error <- TRUE
               r$active_success <- FALSE
@@ -131,18 +147,16 @@ cb_login_server <- function(id = 'login'){
               r$active_success <- TRUE
               r$success_message <- 'Account successfully created. Logging in...'
           }
-#
+
           r$new_account <- TRUE
         })
-
-        # if sign in failed
-        # then notify user
 
 
         # if signed in
         # then hide dialog
         observeEvent(
             f$req_sign_in(), {
+               # print(input$fireblaze_signed_in)
                 # get user information
                 user <- f$get_signed_in()$response
                 r$user <- user[c(
