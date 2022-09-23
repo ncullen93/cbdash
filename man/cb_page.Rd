@@ -8,7 +8,7 @@ cb_page(
   navbar,
   header = NULL,
   body,
-  auth_ui = NULL,
+  auth = NULL,
   dependencies = NULL,
   theme = c("none", "corporate", "earth", "elegance", "flat", "pulse")
 )

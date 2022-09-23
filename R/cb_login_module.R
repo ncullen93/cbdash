@@ -1,3 +1,5 @@
+
+
 #' login UI Function
 #'
 #' @description A shiny Module.
@@ -18,8 +20,8 @@ cb_login_ui <- function(id = 'login'){
             'Welcome to the ABA online application',
             'We make stats {relatively} fun for everyone!'
         ),
-        cb_text_input(ns('email'),'Email', floating=T, width = '100%'),
-        cb_text_input(ns('password'),'Password', floating=T, width = '100%'),
+        cb_email_input(ns('email'),'Email', floating=T, width = '100%'),
+        cb_password_input(ns('password'),'Password', floating=T, width = '100%'),
         cb_row(
             cb_col6(
                 cb_button(ns("signin_account_email"), "Sign in", icon = "envelope",
@@ -30,6 +32,8 @@ cb_login_ui <- function(id = 'login'){
                           color = 'success', width='100%')
             )
         ),
+        shiny::uiOutput(ns('error_ui')),
+        shiny::uiOutput(ns('success_ui')),
         hr(style='background-color: gray; height: 1px; border: none'),
         cb_row(
             cb_col12(
@@ -37,13 +41,6 @@ cb_login_ui <- function(id = 'login'){
             )
 
         ),
-        #cb_row(
-        #    cb_col12(
-        #        cb_button(ns("demo"), "Try a demo", icon = "user-lock",color='primary', width='100%')
-        #    )
-        #
-        #),
-
         footer = tags$div(
             shiny::actionLink('xx', 'Forgot Password')
         )
@@ -58,25 +55,48 @@ cb_login_server <- function(id = 'login'){
     moduleServer( id, function(input, output, session){
         ns <- session$ns
 
-        f <- firebase::FirebaseSocial$new()
-        f2 <- firebase::FirebaseEmailPassword$new()
+        # events to implement
+        # when auth fails, display a message to user
+        # return user login info from this module
+        # require user to accept terms when creating account
+
+        r <- reactiveValues(user = NULL,
+                            new_account = FALSE)
+        #f <- firebase::FirebaseSocial$new()
+        f <- firebase::FirebaseEmailPassword$new()
 
         cb_show_modal(id = 'login_modal', asis=T)
 
+
+        output$error_ui <- renderUI({
+            req(r$active_error)
+            tags$span(
+                style = 'color: red;',
+                r$error_message
+            )
+        })
+
+        output$success_ui <- renderUI({
+            req(r$active_success)
+            tags$span(
+                style = 'color: darkgreen;',
+                r$success_message
+            )
+        })
+
         # if google button pressed
         # then launch google signin
-        observeEvent(
-            input$google, {
-                print('here')
-                f$launch_google()
-            }
-        )
+        #observeEvent(
+        #    input$google, {
+        #        f$launch_google()
+        #    }
+        #)
 
         # if sign-in button pressed
         # then launch email signin
         observeEvent(
             input$signin_account_email, {
-                f2$sign_in(input$email, input$password)
+                f$sign_in(input$email, input$password)
             }
         )
 
@@ -84,32 +104,55 @@ cb_login_server <- function(id = 'login'){
         # then create the account and sign in
         observeEvent(
             input$create_account_email, {
-                #cb_show_modal(id = 'login_modal', asis=T)
-                #cb_show_modal(id = 'login_modal', asis=T)
-#
-                #print('here')
-                #shinyjs::runjs("
-                #               $('#modal-login_modal').dismiss()
-                #               ")
-                #f2$create(input$email, input$password)
+                if (!is_valid_email(input$email)) {
+                    r$active_error <- TRUE
+                    r$error_message <- 'Please enter a valid email address'
+                } else {
+                    r$active_error <- FALSE
+                    f$create(input$email, input$password)
+                }
             }
         )
+
+        # check if creation sucessful
+        observeEvent(f$get_created(), {
+          created <- f$get_created()
+#
+          if (!created$success) {
+              r$active_error <- TRUE
+              r$active_success <- FALSE
+              r$error_message <- paste('Error creating account:', created$response$code)
+          } else {
+              r$active_error <- FALSE
+              r$active_success <- TRUE
+              r$success_message <- 'Account successfully created. Logging in...'
+          }
+#
+          r$new_account <- TRUE
+        })
+
+        # if sign in failed
+        # then notify user
+
 
         # if signed in
         # then hide dialog
         observeEvent(
             f$req_sign_in(), {
-                print('here')
-                #cb_show_modal(id = 'login_modal', asis=T)
+                # get user information
+                user <- f$get_signed_in()$response
+                r$user <- user[c(
+                    'uid',
+                    'email'
+                )]
+
                 shinyjs::click(id = 'login_modal_close', asis=TRUE)
-                print('there')
-                #shinyjs::runjs("
-                #               $('#modal-login_modal').dismiss()
-                #               ")
             }
         )
 
-
+        return(
+            reactive(r$user)
+        )
 
     })
 }

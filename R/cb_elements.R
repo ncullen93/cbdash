@@ -31,8 +31,24 @@ cb_text_input <- function(id, label, value = "", width = NULL, placeholder = NUL
     el
 }
 # email input
+cb_email_input <- function(id, label, value = "", width = NULL, placeholder = NULL,
+                              floating = FALSE) {
+    el <- cb_text_input(
+        id, label, value, width, placeholder, floating
+    )
+    el <- tagQuery(el)$find('input')$removeAttrs('type')$addAttrs('type' = 'email')$allTags()
+    el
+}
 
 # password input
+cb_password_input <- function(id, label, value = "", width = NULL, placeholder = NULL,
+                              floating = FALSE) {
+    el <- cb_text_input(
+        id, label, value, width, placeholder, floating
+    )
+    el <- tagQuery(el)$find('input')$removeAttrs('type')$addAttrs('type' = 'password')$allTags()
+    el
+}
 
 # text area
 

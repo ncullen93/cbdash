@@ -47,7 +47,7 @@ cb_hide_modal <- function(id, asis = TRUE) {
 #' @export
 #'
 #' @examples
-cb_modal_dialog <- function(id, title = NULL, ...) {
+cb_modal <- function(id, title = NULL, ...) {
    btn <- cb_button(paste0(id,'_show'), label=NULL)
    btn <- tagAppendAttributes(
        btn,
@@ -192,7 +192,8 @@ cb_login_modal <- function(id, title = NULL, ...,
                 above_content,
                 tags$div(
                     class = "block block-rounded shadow-none mb-4",
-                    style = 'width: 350px; margin: 0 auto;',
+                    style = 'width: 350px; margin: 0 auto;
+                    box-shadow: 0 0 25px #ccc !important;',
                     tags$div(
                         class = "block-header block-header-default",
                         tags$h3(

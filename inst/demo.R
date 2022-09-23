@@ -21,7 +21,7 @@ project_df <- data.frame(
 
 
 ui <- cb_page(
-    auth_ui = cb_login_ui(),
+    auth = cb_login_ui(),
     dependencies = list(firebase::useFirebase()),
     theme = 'flat',
     navbar = cb_navbar(
@@ -149,7 +149,7 @@ ui <- cb_page(
                 #cb_project_block()
             ),
             modals = list(
-                cb_modal_dialog(id = 'test_modal',
+                cb_modal(id = 'test_modal',
                                 title = 'Test Modal',
                                 tags$div(
                                     tags$p("nick nicksd sfsd"),
@@ -223,6 +223,14 @@ ui <- cb_page(
 server <- function(input, output, session) {
 
     user <- cb_login_server()
+
+    observeEvent(
+        user(),
+        {
+            print('im logged in!')
+            print(user())
+        }
+    )
 
    # f <- firebase::FirebaseSocial$new()
    # f2 <- firebase::FirebaseEmailPassword$new()
@@ -392,7 +400,7 @@ server <- function(input, output, session) {
     observeEvent(
         input$launch_modal2, {
             # create the modal
-            dialog <- cb_modal_dialog(
+            dialog <- cb_modal(
                 id = 'my_modal2',
                 title = 'test modal 2',
                 tags$p('this is a modal test!!')

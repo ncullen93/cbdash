@@ -7,11 +7,11 @@
 #' @export
 #'
 #' @examples
-cb_page <- function(navbar, header = NULL, body, auth_ui = NULL, dependencies = NULL,
+cb_page <- function(navbar, header = NULL, body, auth = NULL, dependencies = NULL,
                     theme = c('none', 'corporate', 'earth', 'elegance','flat','pulse')) {
 
     if (is.null(header)) header <- cb_header()
-    use_signin <- !is.null(auth_ui)
+    use_signin <- !is.null(auth)
 
     body_tags <- tagList(
         navbar,
@@ -34,7 +34,7 @@ cb_page <- function(navbar, header = NULL, body, auth_ui = NULL, dependencies = 
 
    if (use_signin) {
        body_tags <- tagList(
-           auth_ui,
+           auth,
            body_tags
        )
    }
