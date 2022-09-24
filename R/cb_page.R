@@ -53,6 +53,7 @@ cb_page <- function(navbar, header = NULL, body, auth = NULL, dependencies = NUL
                 type="image/x-icon"
             ),
             shinyjs::useShinyjs(),
+            waiter::useWaiter(),
             tagList(
                 dependencies
             )

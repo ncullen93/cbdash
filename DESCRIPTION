@@ -12,7 +12,8 @@ Imports:
     magrittr,
     shinyjs,
     shiny,
-    utils
+    utils,
+    waiter
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2

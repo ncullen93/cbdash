@@ -4,6 +4,7 @@ library(htmltools)
 library(shinyjs)
 library(tidyverse)
 library(reactable)
+library(waiter)
 
 project_df <- data.frame(
     user = 'nickcullen',
@@ -21,8 +22,8 @@ project_df <- data.frame(
 
 
 ui <- cb_page(
-    auth = cb_login_ui(),
-    dependencies = list(firebase::useFirebase()),
+    #auth = cb_login_ui(),
+    dependencies = list(firebase::useFirebase(), waiter::useWaiter()),
     theme = 'flat',
     navbar = cb_navbar(
         brand = cb_navbar_brand(
@@ -68,6 +69,28 @@ ui <- cb_page(
     body = cb_body(
         cb_body_page(
             id = 'page_home',
+            cb_row(
+                cb_col3(
+                    cb_upgrade_card('Developer', '$19', 'per month',
+                                    list(c('2','Projects'),c('10GB', 'Storage')),
+                                    cb_button('xx','Current Plan'))
+                ),
+                cb_col3(
+                    cb_upgrade_card('Developer', '$19', 'per month',
+                                    list(c('2','Projects'),c('10GB', 'Storage')),
+                                    cb_button('xx','Current Plan'))
+                ),
+                cb_col3(
+                    cb_upgrade_card('Developer', '$19', 'per month',
+                                    list(c('2','Projects'),c('10GB', 'Storage')),
+                                    cb_button('xx','Current Plan'))
+                ),
+                cb_col3(
+                    cb_upgrade_card('Developer', '$19', 'per month',
+                                    list(c('2','Projects'),c('10GB','Storage')),
+                                    cb_button('xx','Current Plan'))
+                )
+            ),
             cb_row(
                 cb_col12(
                     # table output for "projects_df"
@@ -227,8 +250,8 @@ ui <- cb_page(
 
 server <- function(input, output, session) {
 
-    user <- cb_login_server()
-    #user <- reactive({'nickcullen31@gmail.com'})#
+    #user <- cb_login_server()
+    user <- reactive({list('email'='nickcullen31@gmail.com')})#
 
     output$header_title <- shiny::renderText({
         user()$email
@@ -327,18 +350,55 @@ server <- function(input, output, session) {
         spacing = 'l'
     )
 
+
     output$mytable2 <- DT::renderDT(
         {
-            project_df
-        },
-        width = '100%',
-        class = 'display table',
-        rownames = FALSE,
-        escape = FALSE,
-        options = list(
-            searching = FALSE
-        )
+           onclick <- sprintf(
+               "Shiny.setInputValue('myclick', '%s')",
+               rownames(project_df)
+           )
+
+           #button = sprintf(
+           #    "<a class='btn btn-primary' onClick='%s'>Click me</a>",
+           #    onclick
+           #)
+
+           #project_df$button <- button
+           #
+            project_df$button <- rownames(project_df) %>%
+                purrr::map_chr(
+                    function(x) {as.character(
+                        tagAppendAttributes(cb_button('clickme','click me'),
+                                            onClick=sprintf("Shiny.setInputValue('myclick', '%s')",
+                                                            x))
+                    )}
+                )
+
+            print(project_df)
+
+            DT::datatable(
+                project_df,
+                width = '100%',
+                # class = 'display table',
+                rownames = FALSE,
+                escape = FALSE,
+                selection = "none"
+                #options = list(
+                #    searching = FALSE
+                #)
+            )
+
+
+
+        }
     )
+
+    observeEvent(
+        input$myclick, {
+            print(input$myclick)
+        }
+    )
+
 
     output$mytable3 <- reactable::renderReactable(
         {

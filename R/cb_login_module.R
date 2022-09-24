@@ -60,6 +60,14 @@ cb_login_server <- function(id = 'login'){
     moduleServer( id, function(input, output, session){
         ns <- session$ns
 
+        w <- waiter::Waiter$new(id = ns('signin_account_email'),
+                                color = '#0891b2',
+                                html = waiter::spin_5())
+
+        w_create <- waiter::Waiter$new(id = ns('create_account_email'),
+                                       color = '#65a30d',
+                                       html = waiter::spin_5())
+
         # events to implement
         # when auth fails, display a message to user
         # return user login info from this module
@@ -101,14 +109,20 @@ cb_login_server <- function(id = 'login'){
         # then launch email signin
         observeEvent(
             input$signin_account_email, {
+                w$show()
                 f$sign_in(input$email, input$password)
+
+                on.exit({
+                    w$hide()
+                })
             }
         )
 
         # if sign in failed
         # then notify user
         observeEvent(
-            input$fireblaze_signed_up_user, {
+            input$fireblaze_signed_up_user$response, {
+
                 if (!is.null(input$fireblaze_signed_up_user$response$code)) {
                     r$active_error <- TRUE
                     r$error_message <- paste('Error logging in:',
@@ -118,20 +132,27 @@ cb_login_server <- function(id = 'login'){
                     r$active_success <- TRUE
                     r$success_message <- 'Authorization successful. Logging in...'
                 }
-            }
+            },
+            ignoreInit = TRUE
         )
 
         # if create account button pressed
         # then create the account and sign in
         observeEvent(
             input$create_account_email, {
+                w_create$show()
+
                 if (!is_valid_email(input$email)) {
                     r$active_error <- TRUE
                     r$error_message <- 'Please enter a valid email address'
                 } else {
-                    r$active_error <- FALSE
                     f$create(input$email, input$password)
                 }
+
+                on.exit({
+                    w_create$hide()
+                })
+
             }
         )
 

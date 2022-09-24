@@ -4,7 +4,7 @@
 \alias{cb_card}
 \title{Title}
 \usage{
-cb_card(title, ..., subtitle = NULL)
+cb_card(title, ..., subtitle = NULL, icon = NULL)
 }
 \arguments{
 \item{...}{}
