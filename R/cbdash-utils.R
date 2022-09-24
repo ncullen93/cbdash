@@ -14,7 +14,7 @@
 #'  findDependencies(add_dependencies(div()))
 #'  findDependencies(add_dependencies(div(), deps = "bulma"))
 #' }
-add_dependencies <- function(tag, deps = NULL, theme = NULL) {
+add_dependencies <- function(tag, deps = NULL) {
   if (is.null(deps)) {
     temp_names <- list.files("./R", pattern = "dependencies.R$")
     deps <- unlist(lapply(temp_names, strsplit, split = "-dependencies.R"))
@@ -23,16 +23,11 @@ add_dependencies <- function(tag, deps = NULL, theme = NULL) {
   if (length(deps) == 0) stop("No dependencies found.")
 
   deps <- lapply(deps, function(x) {
-    if (x == 'codebase') {
-        if (is.null(theme)) theme <- 'none'
-        dep <- htmltools::findDependencies(add_codebase_deps(htmltools::div(), theme))
-    } else {
-        dep <- eval(
-            parse(
-                text = sprintf("htmltools::findDependencies(add_%s_deps(htmltools::div()))", x)
-            )
-        )
-    }
+      dep <- eval(
+          parse(
+              text = sprintf("htmltools::findDependencies(add_%s_deps(htmltools::div()))", x)
+          )
+      )
     dep
   })
 

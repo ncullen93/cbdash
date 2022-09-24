@@ -48,8 +48,15 @@ cb_navbar <- function(brand = NULL, user = NULL, menu, footer = NULL) {
             tags$div(
                 class = "js-sidebar-scroll",
                 tags$div(
+                    class = 'content-side content-side-user pl-4 pr-4',
+                    style = 'min-height: 5.5rem; display: block;',
+                    tags$div(
+                        class = 'smini-hidden text-center mx-auto',
+                        user
+                    )
+                ),
+                tags$div(
                     class = "content-side content-side-full",
-                    user,
                     menu,
                     footer
                 )
@@ -69,14 +76,18 @@ cb_navbar <- function(brand = NULL, user = NULL, menu, footer = NULL) {
 #' @examples
 cb_navbar_brand <- function(title1 = NULL, title2 = NULL, icon=NULL) {
     tags$div(
+        id = "navbar-brand-content",
         class = "content-header justify-content-lg-center bg-black-10",
+
         tags$div(
             tags$a(
                 class = "link-fx fw-bold tracking-wide mx-auto",
                 href = "#",
                 tags$span(
+                    tags$i(class = sprintf("fs-5 fa fa-%s text-primary", icon))
+                ),
+                tags$span(
                     class = "smini-hidden",
-                    tags$i(class = sprintf("fs-5 fa fa-%s text-primary", icon)),
                     tags$span(
                         class = "fs-4 text-dual",
                         title1

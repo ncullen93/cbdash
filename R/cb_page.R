@@ -8,7 +8,7 @@
 #'
 #' @examples
 cb_page <- function(navbar, header = NULL, body, auth = NULL, dependencies = NULL,
-                    theme = c('none', 'corporate', 'earth', 'elegance','flat','pulse')) {
+                    theme = c('default', 'corporate', 'earth', 'elegance','flat','pulse')) {
 
     if (is.null(header)) header <- cb_header()
     use_signin <- !is.null(auth)
@@ -28,7 +28,7 @@ cb_page <- function(navbar, header = NULL, body, auth = NULL, dependencies = NUL
     body_tags <- tags$div(
         id="page-container",
         class="sidebar-o sidebar-dark enable-page-overlay side-scroll
-                           page-header-modern main-content-boxed",
+               page-header-modern  main-content-narrow",
         body_tags
     )
 
@@ -38,6 +38,12 @@ cb_page <- function(navbar, header = NULL, body, auth = NULL, dependencies = NUL
            body_tags
        )
    }
+
+    if (theme == 'default') {
+        theme <- 'codebase'
+    } else {
+        theme = sprintf('themes/%s', theme)
+    }
 
     tagList(
         tags$head(
@@ -51,6 +57,17 @@ cb_page <- function(navbar, header = NULL, body, auth = NULL, dependencies = NUL
                 rel = "shortcut icon",
                 href = NULL,
                 type="image/x-icon"
+            ),
+            # need these tags for the theme selector which is based on the ids
+            tags$link(
+                rel = "stylesheet",
+                id = "css-main",
+                href = "codebase5.3/css/codebase.min.css"
+            ),
+            tags$link(
+                rel = "stylesheet",
+                id = "css-theme",
+                href = paste0("codebase-5.3/css/",theme,".min.css")
             ),
             shinyjs::useShinyjs(),
             waiter::useWaiter(),
@@ -66,8 +83,8 @@ cb_page <- function(navbar, header = NULL, body, auth = NULL, dependencies = NUL
                 'cbdash',
                 'bootstrap',
                 'codebase'
-            ),
-            theme = theme
+            )
+           # theme = theme
         )
     )
 }

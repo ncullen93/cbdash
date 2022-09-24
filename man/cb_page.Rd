@@ -10,7 +10,7 @@ cb_page(
   body,
   auth = NULL,
   dependencies = NULL,
-  theme = c("none", "corporate", "earth", "elegance", "flat", "pulse")
+  theme = c("default", "corporate", "earth", "elegance", "flat", "pulse")
 )
 }
 \arguments{

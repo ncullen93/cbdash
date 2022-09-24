@@ -4,10 +4,7 @@
 \alias{add_codebase_deps}
 \title{codebase dependencies utils}
 \usage{
-add_codebase_deps(
-  tag,
-  theme = c("none", "corporate", "earth", "elegance", "flat", "pulse")
-)
+add_codebase_deps(tag)
 }
 \arguments{
 \item{tag}{Element to attach the dependencies.}

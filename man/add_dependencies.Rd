@@ -4,7 +4,7 @@
 \alias{add_dependencies}
 \title{Attach all created dependencies in the ./R directory to the provided tag}
 \usage{
-add_dependencies(tag, deps = NULL, theme = NULL)
+add_dependencies(tag, deps = NULL)
 }
 \arguments{
 \item{tag}{Tag to attach the dependencies.}

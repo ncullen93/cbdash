@@ -23,8 +23,8 @@ project_df <- data.frame(
 
 ui <- cb_page(
     #auth = cb_login_ui(),
-    dependencies = list(firebase::useFirebase(), waiter::useWaiter()),
     theme = 'flat',
+    dependencies = list(firebase::useFirebase(), waiter::useWaiter()),
     navbar = cb_navbar(
         brand = cb_navbar_brand(
             'aba', 'Cloud', 'cloud'
@@ -69,6 +69,7 @@ ui <- cb_page(
     body = cb_body(
         cb_body_page(
             id = 'page_home',
+            cb_theme_selector(),
             cb_row(
                 cb_col3(
                     cb_upgrade_card('Developer', '$19', 'per month',
