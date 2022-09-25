@@ -39,6 +39,7 @@ cb_page <- function(navbar, header = NULL, body, auth = NULL, dependencies = NUL
        )
    }
 
+    theme <- match.arg(theme)
     if (theme == 'default') {
         theme <- 'codebase'
     } else {

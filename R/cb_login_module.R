@@ -60,6 +60,10 @@ cb_login_server <- function(id = 'login'){
     moduleServer( id, function(input, output, session){
         ns <- session$ns
 
+        # events to implement
+        # require user to accept terms when creating account
+
+
         w <- waiter::Waiter$new(id = ns('signin_account_email'),
                                 color = '#0891b2',
                                 html = waiter::spin_5())
@@ -68,15 +72,12 @@ cb_login_server <- function(id = 'login'){
                                        color = '#65a30d',
                                        html = waiter::spin_5())
 
-        # events to implement
-        # when auth fails, display a message to user
-        # return user login info from this module
-        # require user to accept terms when creating account
+
 
         r <- reactiveValues(new_account = FALSE,
                             user = NULL)
 
-        f_google <- firebase::FirebaseSocial$new()
+        f_google <- firebase::FirebaseSocial$new(persistence = "memory")
         f <- firebase::FirebaseEmailPassword$new()
 
         cb_show_modal(id = 'login_modal', asis=T)

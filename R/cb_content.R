@@ -86,8 +86,8 @@ cb_project_block <- function(ids,
                 style = "text-align: left;",
                 tags$div(
                     class = "col-sm-6 py-4",
-                    tags$h3(
-                        class = "h5 fw-bold mb-2",
+                    tags$h4(
+                        class = "fw-bold mb-2",
                         tags$i(class = "fa fa-circle text-info me-1"),
                         title
                     ),
@@ -100,26 +100,24 @@ cb_project_block <- function(ids,
                         paste("Last Updated on", date_created)
                     ),
                     tags$p(
-                        class = "fs-sm mb-0",
+                        class = "fs-sm mb-0 ",
                         tags$a(
                             class = "me-3 mb-0",
                             href = "javascript:void(0)",
-                            "Plans: 1"
+                            validate_icon('database',fw=T, opacity = 25),
+                            "2 Datasets"
                         ),
                         tags$a(
                             class = "me-3 mb-0",
                             href = "javascript:void(0)",
-                            "Datasets: 2"
+                            validate_icon('calculator',fw=T, opacity = 25),
+                            "7 Models "
                         ),
                         tags$a(
                             class = "me-3 mb-0",
                             href = "javascript:void(0)",
-                            "Models: 7"
-                        ),
-                        tags$a(
-                            class = "me-3 mb-0",
-                            href = "javascript:void(0)",
-                            "Visualizations: 0"
+                            validate_icon('chart-line', fw=T, opacity = 25),
+                            "0 Visualizations"
                         )
                     )
                 ),

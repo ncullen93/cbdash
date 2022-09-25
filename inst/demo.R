@@ -22,7 +22,7 @@ project_df <- data.frame(
 
 
 ui <- cb_page(
-    #auth = cb_login_ui(),
+    auth = cb_login_ui(),
     theme = 'flat',
     dependencies = list(firebase::useFirebase(), waiter::useWaiter()),
     navbar = cb_navbar(
@@ -252,8 +252,8 @@ ui <- cb_page(
 
 server <- function(input, output, session) {
 
-    #user <- cb_login_server()
-    user <- reactive({list('email'='nickcullen31@gmail.com')})#
+    user <- cb_login_server()
+    #user <- reactive({list('email'='nickcullen31@gmail.com')})#
 
     output$header_title <- shiny::renderText({
         user()$email
