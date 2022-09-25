@@ -128,13 +128,13 @@ cb_project_block <- function(ids,
                     shiny::actionLink(
                         inputId = ids[1],
                         class = "btn btn-sm btn-alt-primary me-2 my-1",
-                        icon = shiny::icon('eye opacity-50 me-1'),
+                        icon = validate_icon('eye opacity-50 me-1'),
                         'View'
                     ),
                     shiny::actionLink(
                         inputId = ids[2],
                         class = "btn btn-sm btn-alt-danger me-2 my-1",
-                        icon = shiny::icon('archive opacity-50 me-1'),
+                        icon = validate_icon('archive opacity-50 me-1'),
                         'Archive'
                     )
                 )

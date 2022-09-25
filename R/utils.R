@@ -64,9 +64,14 @@ replace_css_class <- function(tag, old_class, new_class, selector = NULL) {
 #' @export
 #'
 #' @examples
-validate_icon <- function(icon) {
+validate_icon <- function(icon, fw = FALSE, opacity = NULL) {
     if (is.character(icon)) {
-        icon <- shiny::icon(icon)
+        myclass <- 'fa'
+        if (fw) myclass <- paste(myclass, 'fa-fw')
+        myclass <- paste0(myclass, ' fa-', icon)
+        if (!is.null(opacity)) myclass <- paste0(myclass, ' opacity-', opacity)
+        icon <- tags$i(class=myclass)
+        #icon <- shiny::icon(icon, verify_fa=FALSE)
     }
     icon
 }

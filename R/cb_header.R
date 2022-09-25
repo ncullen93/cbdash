@@ -41,21 +41,44 @@ cb_header <- function(...) {
 #' @export
 #'
 #' @examples
-cb_header_dropdown <- function(id, title, subtitle = NULL, options, reactive=FALSE) {
-    dropdown_options <- lapply(
-        options,
-        function(option) {
-            shiny::actionLink(
+cb_header_dropdown <- function(id, title, subtitle = NULL, options, icons = NULL, reactive_title=FALSE) {
+    dropdown_options <- list()
+    for (i in seq_along(options)) {
+        option <- options[i]
+
+        if (is.na(option)) {
+            mytag <- tags$div(class = 'dropdown-divider')
+        } else {
+            mytag <- shiny::actionLink(
                 option,
                 option
             ) %>%
                 tagAppendAttributes(
                     class = 'dropdown-item d-flex align-items-center justify-content-between space-x-1'
                 )
+            if (!is.null(icons)) {
+                mytag <- mytag %>%
+                    tagAppendChild(
+                        validate_icon(icons[i], fw=TRUE, opacity=25)
+                    )
+            }
         }
-    )
+        dropdown_options[[i]] <- mytag
+    }
+    #dropdown_options <- lapply(
+    #    options,
+    #    function(option) {
+    #        shiny::actionLink(
+    #            option,
+    #            option
+    #        ) %>%
+    #            tagAppendAttributes(
+    #                class = 'dropdown-item d-flex align-items-center justify-content-between space-x-1'
+    #            )
+    #    }
+    #)
 
-    if (reactive) title <- shiny::uiOutput(title)
+    if (reactive_title) title <- shiny::uiOutput(title)
 
     if (!is.null(subtitle)) {
         subtitle <- tags$div(
@@ -90,7 +113,7 @@ cb_header_dropdown <- function(id, title, subtitle = NULL, options, reactive=FAL
             subtitle,
             tags$div(
                 class = "p-2",
-                dropdown_options
+                tagList(dropdown_options)
             )
         )
     )

@@ -62,8 +62,9 @@ ui <- cb_page(
         cb_header_dropdown(
             id = 'project_dd',
             title = 'header_title',
-            options = c('Profile', 'Settings', 'Logout'),
-            reactive = TRUE
+            options = c('Profile', 'Settings', NA, 'Logout'),
+            icons = c('user', 'gear', NA, 'sign-out-alt'),
+            reactive_title = TRUE
         )
     ),
     body = cb_body(

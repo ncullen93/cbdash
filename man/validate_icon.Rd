@@ -4,7 +4,7 @@
 \alias{validate_icon}
 \title{Title}
 \usage{
-validate_icon(icon)
+validate_icon(icon, fw = FALSE, opacity = NULL)
 }
 \arguments{
 \item{...}{}
