@@ -4,7 +4,12 @@
 \alias{cb_login_ui}
 \title{Title}
 \usage{
-cb_login_ui(id = "login")
+cb_login_ui(
+  id = "login",
+  brand = c("my", "app"),
+  title = NULL,
+  subtitle = NULL
+)
 }
 \arguments{
 \item{id}{}

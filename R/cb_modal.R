@@ -47,7 +47,7 @@ cb_hide_modal <- function(id, asis = TRUE) {
 #' @export
 #'
 #' @examples
-cb_modal <- function(id, title = NULL, ...) {
+cb_modal <- function(id, title = NULL, ..., footer = NULL) {
    btn <- cb_button(paste0(id,'_show'), label=NULL)
    btn <- tagAppendAttributes(
        btn,
@@ -55,6 +55,23 @@ cb_modal <- function(id, title = NULL, ...) {
        'data-bs-target' = sprintf('#modal-%s',id)
    )
    btn <- btn %>% shinyjs::hidden()
+
+   if (is.null(footer)) {
+       footer <- tagList(
+           tags$button(
+               type = "button",
+               class = "btn btn-alt-secondary",
+               `data-bs-dismiss` = "modal",
+               "Close"
+           ),
+           tags$button(
+               type = "button",
+               class = "btn btn-alt-primary",
+               `data-bs-dismiss` = "modal",
+               "Done"
+           )
+       )
+   }
 
     modal <- tags$div(
         class = "modal",
@@ -96,18 +113,7 @@ cb_modal <- function(id, title = NULL, ...) {
                     # end content
                     tags$div(
                         class = "block-content block-content-full block-content-sm text-end border-top",
-                        tags$button(
-                            type = "button",
-                            class = "btn btn-alt-secondary",
-                            `data-bs-dismiss` = "modal",
-                            "Close"
-                        ),
-                        tags$button(
-                            type = "button",
-                            class = "btn btn-alt-primary",
-                            `data-bs-dismiss` = "modal",
-                            "Done"
-                        )
+                        footer
                     )
                 )
             )

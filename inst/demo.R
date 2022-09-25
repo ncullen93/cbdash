@@ -22,7 +22,11 @@ project_df <- data.frame(
 
 
 ui <- cb_page(
-    auth = cb_login_ui(),
+    #auth = cb_login_ui(
+    #    brand = c('sigatur','Cloud'),
+    #    title = tags$span('The future is',
+    #                      tags$s('bright'), 'Shiny!')
+    #),
     theme = 'flat',
     dependencies = list(firebase::useFirebase(), waiter::useWaiter()),
     navbar = cb_navbar(
@@ -70,68 +74,17 @@ ui <- cb_page(
     body = cb_body(
         cb_body_page(
             id = 'page_home',
-            cb_theme_selector(),
-            cb_row(
-                cb_col3(
-                    cb_upgrade_card('Developer', '$19', 'per month',
-                                    list(c('2','Projects'),c('10GB', 'Storage')),
-                                    cb_button('xx','Current Plan'))
-                ),
-                cb_col3(
-                    cb_upgrade_card('Developer', '$19', 'per month',
-                                    list(c('2','Projects'),c('10GB', 'Storage')),
-                                    cb_button('xx','Current Plan'))
-                ),
-                cb_col3(
-                    cb_upgrade_card('Developer', '$19', 'per month',
-                                    list(c('2','Projects'),c('10GB', 'Storage')),
-                                    cb_button('xx','Current Plan'))
-                ),
-                cb_col3(
-                    cb_upgrade_card('Developer', '$19', 'per month',
-                                    list(c('2','Projects'),c('10GB','Storage')),
-                                    cb_button('xx','Current Plan'))
-                )
-            ),
-            cb_row(
-                cb_col12(
-                    # table output for "projects_df"
-                    cb_card(
-                        title = 'All projects',
-                        shiny::tableOutput('mytable')
-                    ),
-                    cb_card(
-                        title = 'All projects',
-                        DT::DTOutput('mytable2')
-                    ),
-                    cb_content_heading('All projects'),
-                    reactable::reactableOutput('mytable3')
-                )
-            ),
-            cb_row(
-                cb_col8(
-                    cb_content_block(title = 'Welcome to aba Cloud',
-                                     subtitle=tags$div('Explore your modules, add-ons, and projects.'))
-                ),
-                cb_col4(
-                    cb_content_block(
-                        title = NULL,
-                        subtitle=tags$div(
-                            tags$div(shiny::actionLink('xx','Getting Started')),
-                            tags$div(shiny::actionLink('xx','Latest Updates')),
-                            tags$div(shiny::actionLink('xx','About Us'))
-                        )
-                    ) %>% tagAppendAttributes(style = 'background-color: transparent;')
-                )
-            ),
             cb_content_heading('Available Modules', cb_button('add','Explore all modules',
                                                       alt = TRUE, icon = 'arrow-right',
                                                       icon_right = TRUE,
                                                      size='sm', color='success')),
             cb_row(
-                cb_hovercard(id='my_hcard', title='Core Statistics',
-                             subtitle='Fit regression and classification models', icon='chart-bar',
-                             bg_color ='#eefcff'),
+                cb_hovercard(
+                    id='stats_card',
+                    title='Core Statistics',
+                    subtitle='Fit regression and classification models',
+                    icon='chart-bar'
+                ),
                 cb_hovercard(id='my_hcard', title='Plan Creator',
                              subtitle='Build your statistical methods section or SAP', icon='chart-bar',
                              bg_color ='#eefcff'),
@@ -186,74 +139,20 @@ ui <- cb_page(
                                     tags$p("Dolor posuere proin blandit accumsan senectus netus nullam curae, ornare laoreet adipiscing luctus mauris adipiscing pretium eget fermentum, tristique lobortis est ut metus lobortis tortor tincidunt himenaeos habitant quis dictumst proin odio sagittis purus mi, nec taciti vestibulum quis in sit varius lorem sit metus mi.")
                                 ))
             )
-        ),
-        cb_body_page(
-            id = 'page_new_project',
-            cb_row(
-                cb_col12(
-                    cb_card(
-                        title = 'Create New Project',
-                        cb_row(
-                            cb_col3(
-                                cb_muted_text('Projects are how work is organized.
-                                They consist of plans, models, and visualizations.')
-                            ),
-                            cb_col8(
-                                offset = 1,
-                                cb_row(
-                                    cb_col6(
-                                        cb_text_input(id = 'project_name', label='Project Name',
-                                                      width ='100%')
-                                    )
-                                ),
-                                cb_row(
-                                    cb_col12(
-                                        cb_text_input(id = 'project_name', label='Project Description',
-                                                      placeholder = 'This project is about...',
-                                                      width = '100%')
-                                    )
-                                ),
-                                cb_row(
-                                    cb_col12(
-                                        cb_button(id = 'create_project', label = 'Create Project',
-                                                  icon = 'plus', color = 'success',
-                                                  alt = T, size = 'lg', width='100%')
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            )
-
-        ),
-        cb_body_page(
-            id = 'xx',
-            cb_row(cb_col6(cb_card(title = 'Data',
-                                   tags$div(
-                                       cb_file_input('my_input',NULL)
-                                   )))),
-            cb_row(
-                cb_col6(cb_card(title = 'Data', p('This is the data card'))),
-                cb_col6(cb_card(title = 'Data', p('This is the data card')))
-            )
-        ),
-        cb_body_page(
-            id = 'page_analysis',
-            cb_hovercard(id='my_hcard2', title='3 Active', subtitle='Domains', icon='globe'),
-            cb_pillpanel(
-                cb_tab('home','HOME',icon='box-archive opacity-50 me-1',
-                       cb_row(cb_col12(p('my home')))),
-                cb_tab('home2','HOME2',icon='th-large opacity-50 me-1',p('my home2'))
-            )
         )
     )
 )
 
 server <- function(input, output, session) {
 
-    user <- cb_login_server()
-    #user <- reactive({list('email'='nickcullen31@gmail.com')})#
+    observeEvent(
+        input$stats_card, {
+            print('stats card clicked')
+        }
+    )
+
+    #user <- cb_login_server()
+    user <- reactive({list('email'='nickcullen31@gmail.com')})#
 
     output$header_title <- shiny::renderText({
         user()$email
@@ -261,7 +160,7 @@ server <- function(input, output, session) {
 
     observeEvent(
         input$Logout, {
-            print('signing out')
+            #print('signing out')
             user()$logout()
         }
     )
@@ -269,22 +168,22 @@ server <- function(input, output, session) {
     observeEvent(
         user(),
         {
-            print('here')
-            print(user())
-            print(names(input))
+            #print('here')
+            #print(user())
+            #print(names(input))
         }
     )
 
 
     observeEvent(
         input$Profile, {
-            print('profile clicked')
+            #print('profile clicked')
         }
     )
 
     observeEvent(
         input$Settings, {
-            print('Settings clicked')
+            #print('Settings clicked')
         }
     )
    # f <- firebase::FirebaseSocial$new()

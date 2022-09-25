@@ -8,16 +8,18 @@
 #' @export
 #'
 #' @examples
-cb_login_ui <- function(id = 'login'){
+cb_login_ui <- function(id = 'login', brand = c('my', 'app'),
+                        title = NULL,
+                        subtitle = NULL) {
     ns <- NS(id)
     cb_login_news_modal(
         id = 'login_modal',
         title = 'Please sign in',
         background_color = '#e4e7ed',
-        brand = c('aba', 'online'),
-        header = c(
-            'Welcome to the ABA online application',
-            'We make stats {relatively} fun for everyone!'
+        brand = brand,
+        header = list(
+            title,
+            subtitle
         ),
         cb_email_input(ns('email'),'Email', floating=T, width = '100%'),
         cb_password_input(ns('password'),'Password', floating=T, width = '100%'),

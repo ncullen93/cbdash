@@ -10,15 +10,6 @@
 cb_hovercard <- function(id, title, subtitle, icon = NULL,
                          bg_color = NULL) {
 
-    #ffeeee
-    #ffeef8
-    #fbeeff
-    #eef1ff
-    #eefcff
-    #eefff8
-    #eeffee
-    #fcffee
-
     if (!is.null(icon)) {
         icon <- add_css_class(validate_icon(icon), 'fa-3x text-primary')
     }
@@ -29,8 +20,8 @@ cb_hovercard <- function(id, title, subtitle, icon = NULL,
         class = "col-md-6 col-xl-3",
         tags$a(
             id = id,
-            class = "block block-rounded block-link-shadow action-button ",
-            href = "#",
+            class = "block block-rounded block-link-shadow action-button",
+            href = '#',
             `data-val` = value,
             tags$div(
                 class = "block-content block-content-full text-center",

@@ -28,7 +28,7 @@ cb_page <- function(navbar, header = NULL, body, auth = NULL, dependencies = NUL
     body_tags <- tags$div(
         id="page-container",
         class="sidebar-o sidebar-dark enable-page-overlay side-scroll
-               page-header-modern",
+               page-header-modern main-content-narrow",
         body_tags
     )
 
