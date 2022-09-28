@@ -9,8 +9,13 @@
 #'
 #' @examples
 cb_login_ui <- function(id = 'login', brand = c('my', 'app'),
-                        title = NULL,
-                        subtitle = NULL) {
+                        title = NULL, subtitle = NULL,
+                        contact = NULL) {
+
+    if (!is.null(contact)) {
+        contact <- tags$a('Contact Us', href=paste0('mailto:',contact))
+    }
+
     ns <- NS(id)
     cb_login_news_modal(
         id = 'login_modal',
@@ -43,8 +48,11 @@ cb_login_ui <- function(id = 'login', brand = c('my', 'app'),
             )
 
         ),
-        footer = tags$div(
+        left_footer = tags$div(
             shiny::actionLink(ns('forgot_password'), 'Forgot Password?')
+        ),
+        right_footer = tags$div(
+            contact
         )
     )
 

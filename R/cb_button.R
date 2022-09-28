@@ -15,7 +15,8 @@ cb_button <- function(id,
                       size = c('md','sm','lg'),
                       alt = FALSE,
                       disabled = FALSE,
-                      icon_right = FALSE
+                      icon_right = FALSE,
+                      transparent = FALSE
 ) {
 
     color <- match.arg(color)
@@ -57,6 +58,12 @@ cb_button <- function(id,
     if (disabled) {
         btn <- shinyjs::disabled(btn)
     }
+
+    if (transparent)
+        btn <- htmltools::tagAppendAttributes(
+            btn,
+            style = 'background: transparent; border: none;'
+        )
 
     btn
 }

@@ -4,7 +4,16 @@
 \alias{cb_project_block}
 \title{Title}
 \usage{
-cb_project_block(ids, title, description, date_created)
+cb_project_block(
+  ids,
+  title,
+  description,
+  date_created,
+  date_updated,
+  n_datasets,
+  n_models,
+  n_results
+)
 }
 \arguments{
 \item{side_button}{}

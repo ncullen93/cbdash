@@ -8,7 +8,8 @@ cb_login_ui(
   id = "login",
   brand = c("my", "app"),
   title = NULL,
-  subtitle = NULL
+  subtitle = NULL,
+  contact = NULL
 )
 }
 \arguments{

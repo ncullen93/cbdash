@@ -4,7 +4,7 @@
 \alias{cb_hovercard}
 \title{Title}
 \usage{
-cb_hovercard(id, title, subtitle, icon = NULL, bg_color = NULL)
+cb_hovercard(id, title, subtitle = NULL, icon = NULL, bg_color = NULL)
 }
 \arguments{
 \item{...}{}

@@ -19,12 +19,12 @@ cb_page <- function(navbar, header = NULL, body, auth = NULL, dependencies = NUL
         body
     )
 
-    if (use_signin) {
-        body_tags <- firebase::reqSignin(
-            body_tags
-        )
-    }
-
+    #if (use_signin) {
+    #    body_tags <- firebase::reqSignin(
+    #        body_tags
+    #    )
+    #}
+#
     body_tags <- tags$div(
         id="page-container",
         class="sidebar-o sidebar-dark enable-page-overlay side-scroll

@@ -13,7 +13,8 @@ cb_button(
   size = c("md", "sm", "lg"),
   alt = FALSE,
   disabled = FALSE,
-  icon_right = FALSE
+  icon_right = FALSE,
+  transparent = FALSE
 )
 }
 \arguments{

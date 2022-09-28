@@ -75,7 +75,11 @@ cb_project_block_demo <- function() {
 cb_project_block <- function(ids,
                              title,
                              description,
-                             date_created) {
+                             date_created,
+                             date_updated,
+                             n_datasets,
+                             n_models,
+                             n_results) {
     tags$div(
         class = "block block-rounded",
         tags$div(
@@ -97,7 +101,11 @@ cb_project_block <- function(ids,
                     ),
                     tags$p(
                         class = "fs-sm text-muted mb-4",
-                        paste("Last Updated on", date_created)
+                        paste("Created on", date_created)
+                    ),
+                    tags$p(
+                        class = "fs-sm text-muted mb-4",
+                        paste("Updated on", date_updated)
                     ),
                     tags$p(
                         class = "fs-sm mb-0 ",
@@ -105,19 +113,19 @@ cb_project_block <- function(ids,
                             class = "me-3 mb-0",
                             href = "javascript:void(0)",
                             validate_icon('database',fw=T, opacity = 25),
-                            "2 Datasets"
+                            glue::glue("{n_datasets} Datasets")
                         ),
                         tags$a(
                             class = "me-3 mb-0",
                             href = "javascript:void(0)",
                             validate_icon('calculator',fw=T, opacity = 25),
-                            "7 Models "
+                            glue::glue("{n_models} Models")
                         ),
                         tags$a(
                             class = "me-3 mb-0",
                             href = "javascript:void(0)",
                             validate_icon('chart-line', fw=T, opacity = 25),
-                            "0 Visualizations"
+                            glue::glue("{n_results} Results")
                         )
                     )
                 ),

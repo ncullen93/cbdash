@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-cb_hovercard <- function(id, title, subtitle, icon = NULL,
+cb_hovercard <- function(id, title, subtitle = NULL, icon = NULL,
                          bg_color = NULL) {
 
     if (!is.null(icon)) {
@@ -33,13 +33,28 @@ cb_hovercard <- function(id, title, subtitle, icon = NULL,
                     icon
                 ),
                 tags$p(
+                    style = 'display: block;
+                    text-overflow: ellipsis;
+                    word-wrap: break-word;
+                    overflow: hidden;
+                    max-height: 1.6em;
+                    line-height: 1.6em;',
                     class = "fs-lg fw-semibold mb-0",
                     title
                 ),
-                tags$p(
-                    class = "fs-sm fw-medium text-muted mb-0",
-                    subtitle
+                tags$div(
+                    style = 'display: block;
+                    text-overflow: ellipsis;
+                    word-wrap: break-word;
+                    overflow: hidden;
+                    max-height: 3.2em;
+                    line-height: 1.6em;',
+                    tags$p(
+                        class = "fs-sm text-muted mb-0",
+                        subtitle
+                    )
                 )
+
             )
         )
     )

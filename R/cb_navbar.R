@@ -84,16 +84,16 @@ cb_navbar_brand <- function(title1 = NULL, title2 = NULL, icon=NULL) {
                 class = "link-fx fw-bold tracking-wide mx-auto",
                 href = "#",
                 tags$span(
-                    tags$i(class = sprintf("fs-5 fa fa-%s text-primary", icon))
+                    tags$i(class = sprintf("fs-4 fa fa-%s text-primary", icon))
                 ),
                 tags$span(
                     class = "smini-hidden",
                     tags$span(
-                        class = "fs-4 text-dual",
+                        class = "fs-4 text-primary",
                         title1
                     ),
                     tags$span(
-                        class = "fs-4 text-primary",
+                        class = "fs-4 text-dual",
                         title2
                     )
                 )

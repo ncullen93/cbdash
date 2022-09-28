@@ -25,13 +25,14 @@ ui <- cb_page(
     #auth = cb_login_ui(
     #    brand = c('sigatur','Cloud'),
     #    title = tags$span('The future is',
-    #                      tags$s('bright'), 'Shiny!')
+    #                      tags$s('bright'), 'Shiny!'),
+    #    contact = 'info@sigatur.com'
     #),
     theme = 'flat',
     dependencies = list(firebase::useFirebase(), waiter::useWaiter()),
     navbar = cb_navbar(
         brand = cb_navbar_brand(
-            'aba', 'Cloud', 'cloud'
+            'sigatur', 'Cloud', 'cloud'
         ),
         user = cb_button(
             id = 'btn_new_project',
@@ -82,17 +83,20 @@ ui <- cb_page(
                 cb_hovercard(
                     id='stats_card',
                     title='Core Statistics',
-                    subtitle='Fit regression and classification models',
+                    #subtitle='Fit regression and classification models',
                     icon='chart-bar'
                 ),
                 cb_hovercard(id='my_hcard', title='Plan Creator',
-                             subtitle='Build your statistical methods section or SAP', icon='chart-bar',
+                             #subtitle='Build your statistical methods section or SAP',
+                             icon='chart-bar',
                              bg_color ='#eefcff'),
                 cb_hovercard(id='my_hcard', title='Biomarkers',
-                             subtitle='Perform analysis specific to biomarker data', icon='chart-bar',
+                             subtitle='Perform analysis specific to biomarker data',
+                             icon='chart-bar',
                              bg_color ='#eefcff'),
-                cb_hovercard(id='my_hcard', title='Clinical Trials',
-                             subtitle='Perform ANCOVA, MMRM & more on trial data', icon='chart-bar',
+                cb_hovercard(id='my_hcard', title='Data Processing',
+                             subtitle='Perform ANCOVA, MMRM & more on trial data',
+                             icon='chart-bar',
                              bg_color ='#eefcff')
                 #cb_hovercard_placeholder(id = 'my_hcard2', title = 'Explore...',
                 #                         subtitle = 'Add new modules',

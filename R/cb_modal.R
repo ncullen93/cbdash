@@ -237,7 +237,8 @@ cb_login_modal <- function(id, title = NULL, ...,
 #'
 #' @examples
 cb_login_news_modal <- function(id, title = NULL, ...,
-                           footer = NULL,
+                           left_footer = NULL,
+                           right_footer = NULL,
                            brand = NULL,
                            header = NULL,
                            background_color = NULL) {
@@ -341,10 +342,21 @@ cb_login_news_modal <- function(id, title = NULL, ...,
 
                     ),
                     ## end content
-                    tags$div(
-                        class = "block-content block-content-full block-content-sm  border-top",
-                        footer
+                    cb_row(
+                        cb_col6(
+                            tags$div(
+                                class = "block-content block-content-full block-content-sm border-top",
+                                left_footer
+                            )
+                        ),
+                        cb_col6(
+                            tags$div(
+                                class = "block-content block-content-full block-content-sm text-end border-top",
+                                right_footer
+                            )
+                        )
                     )
+
                 )
             )
         )
