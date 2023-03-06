@@ -19,6 +19,7 @@ cb_theme_selector <- function() {
                         `data-toggle` = "theme",
                         `data-theme` = "codebase-5.3/css/codebase.min.css",
                         href = "javascript:void(0)",
+                        id = "click_codebase",
                         tags$i(class = "fa fa-paint-brush")
                     ),
                     tags$div(
@@ -33,6 +34,7 @@ cb_theme_selector <- function() {
                         `data-toggle` = "theme",
                         `data-theme` = "codebase-5.3/css/themes/elegance.min.css",
                         href = "javascript:void(0)",
+                        id = "click_elegance",
                         tags$i(class = "fa fa-paint-brush")
                     ),
                     tags$div(
@@ -47,6 +49,7 @@ cb_theme_selector <- function() {
                         `data-toggle` = "theme",
                         `data-theme` = "codebase-5.3/css/themes/pulse.min.css",
                         href = "javascript:void(0)",
+                        id = "click_pulse",
                         tags$i(class = "fa fa-paint-brush")
                     ),
                     tags$div(
@@ -61,6 +64,7 @@ cb_theme_selector <- function() {
                         `data-toggle` = "theme",
                         `data-theme` = "codebase-5.3/css/themes/flat.min.css",
                         href = "javascript:void(0)",
+                        id = "click_flat",
                         tags$i(class = "fa fa-paint-brush")
                     ),
                     tags$div(
@@ -75,6 +79,7 @@ cb_theme_selector <- function() {
                         `data-toggle` = "theme",
                         `data-theme` = "codebase-5.3/css/themes/corporate.min.css",
                         href = "javascript:void(0)",
+                        id = "click_corporate",
                         tags$i(class = "fa fa-paint-brush")
                     ),
                     tags$div(
@@ -89,6 +94,7 @@ cb_theme_selector <- function() {
                         `data-toggle` = "theme",
                         `data-theme` = "codebase-5.3/css/themes/earth.min.css",
                         href = "javascript:void(0)",
+                        id = "click_earth",
                         tags$i(class = "fa fa-paint-brush")
                     ),
                     tags$div(

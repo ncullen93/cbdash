@@ -31,13 +31,14 @@ ui <- cb_page(
     theme = 'flat',
     dependencies = list(firebase::useFirebase(), waiter::useWaiter()),
     navbar = cb_navbar(
+        mini = T,
         brand = cb_navbar_brand(
             'sigatur', 'Cloud', 'cloud'
         ),
         user = cb_button(
             id = 'btn_new_project',
             label = 'New Project',
-            icon = 'plus',
+            icon = 'rocket',
             color = 'info',
             alt = TRUE
         ),
@@ -75,6 +76,14 @@ ui <- cb_page(
     body = cb_body(
         cb_body_page(
             id = 'page_home',
+            tags$div(cb_item_block(id='cb0', title = 'My title', subtitle = 'My subtitle2')),
+            cb_item_block(id='cb2322', title = 'My title2', subtitle = 'My subtitle2'),
+            shiny::uiOutput('my_item_block'),
+            cb_card(
+                'slider',
+                cb_slider_input('kMax','kMax',1,10,3)
+            ),
+            cb_button('launch_modal' ,'Launch modal'),
             cb_content_heading('Available Modules', cb_button('add','Explore all modules',
                                                       alt = TRUE, icon = 'arrow-right',
                                                       icon_right = TRUE,
@@ -126,18 +135,14 @@ ui <- cb_page(
                                                              icon_right = TRUE,
                                                               size='sm', color='success')),
             tags$div(
-                #cb_project_block_demo(),
-                shinycssloaders::withSpinner(
-                    cb_project_block(ids= c('testbtn_view','testbtn_archive'), title='test','xcsfds', '09/01'),
-                    image.height='300px',
-                    proxy.height = '150px'
-                )
+
 
                 #cb_project_block()
             ),
             modals = list(
                 cb_modal(id = 'test_modal',
                                 title = 'Test Modal',
+                         size = 'lg',
                                 tags$div(
                                     tags$p("nick nicksd sfsd"),
                                     tags$p("Dolor posuere proin blandit accumsan senectus netus nullam curae, ornare laoreet adipiscing luctus mauris adipiscing pretium eget fermentum, tristique lobortis est ut metus lobortis tortor tincidunt himenaeos habitant quis dictumst proin odio sagittis purus mi, nec taciti vestibulum quis in sit varius lorem sit metus mi.")
@@ -149,6 +154,9 @@ ui <- cb_page(
 
 server <- function(input, output, session) {
 
+    output$my_item_block <- shiny::renderUI({
+        tagList(cb_item_block(id='cb1', title = 'My title3', subtitle = 'My subtitle3'))
+    })
     observeEvent(
         input$stats_card, {
             print('stats card clicked')

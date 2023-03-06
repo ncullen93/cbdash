@@ -9,6 +9,7 @@ cb_login_ui(
   brand = c("my", "app"),
   title = NULL,
   subtitle = NULL,
+  news = NULL,
   contact = NULL
 )
 }

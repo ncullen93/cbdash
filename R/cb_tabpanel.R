@@ -47,7 +47,7 @@ cb_pillpanel <- function(..., options = NULL) {
     )
 
     tabpanel_header <- tags$div(
-        class = "px-4 py-3 bg-body-extra-light rounded push",
+        class = "px-4 py-2 bg-body-extra-light mb-3 rounded push pillpanel-header",
         tabpanel_header
     )
 
@@ -55,7 +55,7 @@ cb_pillpanel <- function(..., options = NULL) {
     tagList(
         tabpanel_header,
         tags$div(
-            class = "block block-rounded overflow-hidden",
+            class = "block block-rounded overflow-hidden pillpanel-tab",
             tags$div(
                 class = "block-content tab-content",
                 cb_tab_content_tags

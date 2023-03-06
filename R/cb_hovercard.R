@@ -15,7 +15,7 @@ cb_hovercard <- function(id, title, subtitle = NULL, icon = NULL,
     }
 
     value <- restoreInput(id = id, default = NULL)
-
+    el <- 
     tags$div(
         class = "col-md-6 col-xl-3",
         tags$a(
@@ -58,6 +58,13 @@ cb_hovercard <- function(id, title, subtitle = NULL, icon = NULL,
             )
         )
     )
+
+    el <- htmltools::tagAppendAttributes(
+        el,
+        style = 'border: 3px solid white;',
+        .cssSelector = '.action-button'
+    )
+    el
 }
 
 
@@ -71,16 +78,10 @@ cb_hovercard <- function(id, title, subtitle = NULL, icon = NULL,
 #' @examples
 cb_hovercard_placeholder <- function(id, title, subtitle, icon = NULL) {
     el <- cb_hovercard(id, title, subtitle, icon)
-    print(el)
     el <- htmltools::tagAppendAttributes(
         el,
         style = 'background-color: transparent; border: 3px solid gray;',
         .cssSelector = '.action-button'
     )
-    #el <- htmltools::tagAppendAttributes(
-    #    el,
-    #    style = 'border: 3px dashed gray;',
-    #    .cssSelector = '.block-content-full'
-    #)
     el
 }

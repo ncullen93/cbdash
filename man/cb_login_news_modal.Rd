@@ -8,6 +8,7 @@ cb_login_news_modal(
   id,
   title = NULL,
   ...,
+  news,
   left_footer = NULL,
   right_footer = NULL,
   brand = NULL,

@@ -12,7 +12,8 @@ cb_select_input(
   multiple = FALSE,
   select2 = TRUE,
   width = NULL,
-  size = NULL
+  size = NULL,
+  mb = 4
 )
 }
 \arguments{

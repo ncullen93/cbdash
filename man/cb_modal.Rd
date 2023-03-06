@@ -4,7 +4,13 @@
 \alias{cb_modal}
 \title{Title}
 \usage{
-cb_modal(id, title = NULL, ..., footer = NULL)
+cb_modal(
+  id,
+  title = NULL,
+  ...,
+  footer = NULL,
+  size = c("md", "sm", "lg", "xl")
+)
 }
 \arguments{
 \item{...}{}

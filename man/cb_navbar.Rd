@@ -4,7 +4,7 @@
 \alias{cb_navbar}
 \title{Title}
 \usage{
-cb_navbar(brand = NULL, user = NULL, menu, footer = NULL)
+cb_navbar(brand = NULL, user = NULL, menu, footer = NULL, mini = FALSE)
 }
 \arguments{
 \item{...}{}

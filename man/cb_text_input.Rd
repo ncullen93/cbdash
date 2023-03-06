@@ -10,7 +10,8 @@ cb_text_input(
   value = "",
   width = NULL,
   placeholder = NULL,
-  floating = FALSE
+  floating = FALSE,
+  mb = 4
 )
 }
 \arguments{

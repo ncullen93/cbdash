@@ -35,7 +35,7 @@ cb_show_modal <- function(id, asis = TRUE) {
 #'
 #' @examples
 cb_hide_modal <- function(id, asis = TRUE) {
-    shinyjs::click(id = paste0(id,'_hide'), asis=asis)
+    shinyjs::click(id = paste0(id,'_close'), asis=asis)
 }
 
 
@@ -47,14 +47,28 @@ cb_hide_modal <- function(id, asis = TRUE) {
 #' @export
 #'
 #' @examples
-cb_modal <- function(id, title = NULL, ..., footer = NULL) {
-   btn <- cb_button(paste0(id,'_show'), label=NULL)
+cb_modal <- function(id, title = NULL, ..., footer = NULL,
+                     size = c('md', 'sm', 'lg', 'xl')) {
+    size <- match.arg(size)
+
+   btn <- cb_button(paste0(id,'_show'), label = NULL)
    btn <- tagAppendAttributes(
        btn,
        'data-bs-toggle' = 'modal',
        'data-bs-target' = sprintf('#modal-%s',id)
    )
    btn <- btn %>% shinyjs::hidden()
+
+    btn_close <- cb_button(paste0(id,'_close'), label = NULL)
+    btn_close <- tagAppendAttributes(
+        btn_close,
+        'data-bs-dismiss'="modal",
+        'data-bs-target' = sprintf('#modal-%s',id)
+    )
+    btn_close <- btn_close %>% shinyjs::hidden()
+
+    modal_size <- NULL
+    if (size != 'md') modal_size <- sprintf('modal-%s', size)
 
    if (is.null(footer)) {
        footer <- tagList(
@@ -80,8 +94,10 @@ cb_modal <- function(id, title = NULL, ..., footer = NULL) {
         role = "dialog",
         `aria-labelledby` = sprintf("modal-%s",id),
         `aria-hidden` = "true",
+        'data-bs-keyboard'="false",
+        'data-bs-backdrop'="static",
         tags$div(
-            class = "modal-dialog",
+            class = paste("modal-dialog", modal_size),
             role = "document",
             tags$div(
                 class = "modal-content",
@@ -121,7 +137,7 @@ cb_modal <- function(id, title = NULL, ..., footer = NULL) {
     )
 
     tagList(
-        btn, modal
+        btn, btn_close, modal
     )
 }
 
@@ -237,6 +253,7 @@ cb_login_modal <- function(id, title = NULL, ...,
 #'
 #' @examples
 cb_login_news_modal <- function(id, title = NULL, ...,
+                                news,
                            left_footer = NULL,
                            right_footer = NULL,
                            brand = NULL,
@@ -284,6 +301,16 @@ cb_login_news_modal <- function(id, title = NULL, ...,
         )
     )
 
+    news_tags <- news %>% purrr::map2(
+        names(news),
+        function(content, title) {
+            tagList(
+                span(tags$b(title), br(), content),
+                br(), br()
+            )
+        }
+    )
+
     modal <- tags$div(
         class = "modal",
         style = glue::glue('background-color: {background_color}'),
@@ -328,14 +355,7 @@ cb_login_news_modal <- function(id, title = NULL, ...,
                                         tagAppendAttributes(class='pt-0 mb-0',
                                                             style='color: #0891b2;
                                                             border-bottom: none;'),
-                                    span(tags$b('Launch'),br(),'The aba Online application
-                                    launched to the public on 10/23/2022'),
-                                    br(), br(),
-                                    span(tags$b('Stats App Available'),br(),'The statistics
-                                         app is now available for everyone.'),
-                                    br(), br(),
-                                    span(tags$b('Code Export Integration'),br(),'An integration
-                                         that allows you to export code from models..')
+                                    news_tags
                                 )
                             )
                         )

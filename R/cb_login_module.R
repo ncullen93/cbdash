@@ -10,6 +10,7 @@
 #' @examples
 cb_login_ui <- function(id = 'login', brand = c('my', 'app'),
                         title = NULL, subtitle = NULL,
+                        news = NULL,
                         contact = NULL) {
 
     if (!is.null(contact)) {
@@ -20,6 +21,7 @@ cb_login_ui <- function(id = 'login', brand = c('my', 'app'),
     cb_login_news_modal(
         id = 'login_modal',
         title = 'Please sign in',
+        news = news,
         background_color = '#e4e7ed',
         brand = brand,
         header = list(
@@ -190,7 +192,6 @@ cb_login_server <- function(id = 'login'){
 
             # clear all inputs from the login modal
 
-
             # show the login modal again
             cb_show_modal(id = 'login_modal', asis=T)
             updateTextInput(inputId = ns('email'), value = '')
@@ -201,13 +202,11 @@ cb_login_server <- function(id = 'login'){
         # then hide dialog
         observeEvent(
             f$req_sign_in(), {
-               # print(input$fireblaze_signed_in)
                 # get user information
                 user <- f$get_signed_in()$response
-                r$user <- user[c(
-                    'uid',
-                    'email'
-                )]
+                # what info is returned here?
+                # definitely: "uid", "email"
+                r$user <- user
                 r$user$logout <- signout_fn
 
                 r$active_error <- FALSE
@@ -229,8 +228,6 @@ cb_login_server <- function(id = 'login'){
                     r$active_error <- FALSE
                     r$active_success <- TRUE
                     r$success_message <- 'Password reset link was sent to email'
-                    print('click resetting password')
-                    print(user_email)
                     f$reset_password(user_email)
                 }
             }

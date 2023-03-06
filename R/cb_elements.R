@@ -9,7 +9,7 @@
 #'
 #' @examples
 cb_text_input <- function(id, label, value = "", width = NULL, placeholder = NULL,
-                          floating = FALSE) {
+                          floating = FALSE, mb = 4) {
     if (floating) placeholder <- 'placeholder'
     el <- shiny::textInput(
         inputId = id,
@@ -20,7 +20,7 @@ cb_text_input <- function(id, label, value = "", width = NULL, placeholder = NUL
     )
     el <- tagQuery(el)$find('label')$removeClass('control-label')$addClass('form-label')$allTags()
     el <- tagQuery(el)$find('input')$addAttrs('name' = id)$allTags()
-    el <- add_css_class(el, 'mb-4')
+    if (mb > 0) el <- add_css_class(el, paste0('mb-',mb))
     if (floating) {
         el <- add_css_class(el, 'form-floating')
         # switch the label and the input positions
@@ -63,7 +63,7 @@ cb_password_input <- function(id, label, value = "", width = NULL, placeholder =
 #' @examples
 cb_select_input <- function(id, label, choices, selected = NULL,
                             multiple = FALSE, select2 = TRUE,
-                            width = NULL, size = NULL) {
+                            width = NULL, size = NULL, mb = 4) {
     el <- shiny::selectInput(
         inputId = id,
         label = label,
@@ -74,7 +74,7 @@ cb_select_input <- function(id, label, choices, selected = NULL,
         width = width,
         size = size
     )
-    #el <- add_css_class(el, 'mb-4')
+    if (mb > 0) el <- add_css_class(el, paste0('mb-', mb))
     el <- replace_css_class(el, 'control-label', 'form-label', selector = 'label')
     el <- replace_css_class(el, 'form-control', 'form-select', selector = 'select')
     el$children[[2]] <- el$children[[2]]$children # remove div around select
@@ -121,7 +121,7 @@ cb_file_input <- function(id,
         placeholder = placeholder,
         capture = capture
     )
-    #el <- add_css_class(el, 'mb-4')
+    el <- add_css_class(el, 'mb-4')
     el <- replace_css_class(el, 'control-label', 'form-label', selector=sprintf('#%s-label',id))
     el <- replace_css_class(el, 'btn-default',
                             sprintf('btn-alt-%s rounded-0 rounded-start',color),

@@ -8,7 +8,8 @@
 #'
 #' @examples
 cb_page <- function(navbar, header = NULL, body, auth = NULL, dependencies = NULL,
-                    theme = c('default', 'corporate', 'earth', 'elegance','flat','pulse')) {
+                    theme = c('default', 'corporate', 'earth', 'elegance','flat','pulse'),
+                    sidebar_width = 250) {
 
     if (is.null(header)) header <- cb_header()
     use_signin <- !is.null(auth)
@@ -19,23 +20,21 @@ cb_page <- function(navbar, header = NULL, body, auth = NULL, dependencies = NUL
         body
     )
 
-    #if (use_signin) {
-    #    body_tags <- firebase::reqSignin(
-    #        body_tags
-    #    )
-    #}
-#
+    body_class <- "sidebar-o sidebar-dark enable-page-overlay side-scroll
+                 page-header-modern main-content-narrow"
+    if (is_mini(navbar)) body_class <- paste(body_class, 'sidebar-mini')
+
     body_tags <- tags$div(
         id="page-container",
-        class="sidebar-o sidebar-dark enable-page-overlay side-scroll
-               page-header-modern main-content-narrow",
+        class = body_class,
+        style = glue::glue('padding-left: {sidebar_width}px !important;'),
         body_tags
     )
 
    if (use_signin) {
        body_tags <- tagList(
            auth,
-           body_tags
+           firebase::reqSignin(body_tags)
        )
    }
 
