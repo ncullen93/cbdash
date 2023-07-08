@@ -8,7 +8,7 @@
 #'
 #' @examples
 cb_hovercard <- function(id, title, subtitle = NULL, icon = NULL,
-                         bg_color = NULL) {
+                         bg_color = NULL, onclick = NULL) {
 
     if (!is.null(icon)) {
         icon <- add_css_class(validate_icon(icon), 'fa-3x text-primary')
@@ -20,6 +20,7 @@ cb_hovercard <- function(id, title, subtitle = NULL, icon = NULL,
         class = "col-md-6 col-xl-3",
         tags$a(
             id = id,
+            onclick = onclick,
             class = "block block-rounded block-link-shadow action-button",
             href = '#',
             `data-val` = value,

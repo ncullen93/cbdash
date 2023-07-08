@@ -31,12 +31,13 @@ cb_page <- function(navbar, header = NULL, body, auth = NULL, dependencies = NUL
         body_tags
     )
 
-   if (use_signin) {
-       body_tags <- tagList(
-           auth,
-           firebase::reqSignin(body_tags)
-       )
-   }
+    # apps have to run shinyjs::show(id='page-container', asis=T) to unhide main body after auth
+    if (use_signin) {
+        body_tags <- tagList(
+            auth,
+            body_tags %>% shinyjs::hidden()
+        )
+    }
 
     theme <- match.arg(theme)
     if (theme == 'default') {
@@ -44,10 +45,6 @@ cb_page <- function(navbar, header = NULL, body, auth = NULL, dependencies = NUL
     } else {
         theme = sprintf('themes/%s', theme)
     }
-
-    #if (!is.null(auth)) {
-    #    dependencies <- list(dependencies, firebase::useFirebase())
-    #}
 
     tagList(
         tags$head(

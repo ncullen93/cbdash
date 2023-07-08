@@ -258,7 +258,8 @@ cb_login_news_modal <- function(id, title = NULL, ...,
                            right_footer = NULL,
                            brand = NULL,
                            header = NULL,
-                           background_color = NULL) {
+                           background_color = NULL,
+                           icon = NULL) {
     btn <- cb_button(paste0(id,'_show'), label=NULL)
     btn <- tagAppendAttributes(
         btn,
@@ -276,12 +277,15 @@ cb_login_news_modal <- function(id, title = NULL, ...,
     )
     btn_close <- btn_close %>% shinyjs::hidden()
 
+    above_icon <- NULL
+    if (!is.null(icon)) above_icon <- tags$i(class = paste("fa", icon))
+
     above_content <- tags$div(
         class = "py-4 text-center",
         tags$a(
             class = "link-fx fw-bold",
             href = "#",
-            tags$i(class = "fa fa-fire"),
+            above_icon,
             tags$span(
                 class = "fs-4 text-body-color",
                 brand[1]
@@ -381,7 +385,7 @@ cb_login_news_modal <- function(id, title = NULL, ...,
             )
         )
     )
-
+    
     tagList(
         btn, btn_close, modal
     )

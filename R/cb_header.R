@@ -15,6 +15,7 @@ cb_header <- function(...) {
             # LEFT SECTION -- TOGGLER
             tags$div(
                 class = "space-x-1",
+                id = 'left-toggler',
                 tags$button(
                     type = "button",
                     class = "btn btn-sm btn-alt-secondary",
@@ -26,6 +27,7 @@ cb_header <- function(...) {
             # RIGHT SECTION -- DROPDOWN
             tags$div(
                 class = "space-x-1",
+                id = 'right-dropdown',
                 ...
             )
         )
