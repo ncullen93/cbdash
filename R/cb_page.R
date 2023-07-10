@@ -12,7 +12,6 @@ cb_page <- function(navbar, header = NULL, body, auth = NULL, dependencies = NUL
                     sidebar_width = 250) {
 
     if (is.null(header)) header <- cb_header()
-    use_signin <- !is.null(auth)
 
     body_tags <- tagList(
         navbar,
@@ -32,11 +31,8 @@ cb_page <- function(navbar, header = NULL, body, auth = NULL, dependencies = NUL
     )
 
     # apps have to run shinyjs::show(id='page-container', asis=T) to unhide main body after auth
-    if (use_signin) {
-        body_tags <- tagList(
-            auth,
-            body_tags %>% shinyjs::hidden()
-        )
+    if (isTRUE(auth)) {
+        body_tags <- body_tags %>% shinyjs::hidden()
     }
 
     theme <- match.arg(theme)

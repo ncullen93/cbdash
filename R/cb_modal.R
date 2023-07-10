@@ -252,7 +252,7 @@ cb_login_modal <- function(id, title = NULL, ...,
 #' @export
 #'
 #' @examples
-cb_login_news_modal <- function(id, title = NULL, ...,
+cb_login_news_modal <- function(title = NULL, ...,
                                 news,
                            left_footer = NULL,
                            right_footer = NULL,
@@ -260,22 +260,6 @@ cb_login_news_modal <- function(id, title = NULL, ...,
                            header = NULL,
                            background_color = NULL,
                            icon = NULL) {
-    btn <- cb_button(paste0(id,'_show'), label=NULL)
-    btn <- tagAppendAttributes(
-        btn,
-        'data-bs-toggle' = 'modal',
-        'data-bs-target' = sprintf('#modal-%s',id)
-    )
-    btn <- btn %>% shinyjs::hidden()
-
-    btn_close <- cb_button(paste0(id,'_close'), label = NULL)
-    btn_close <- tagAppendAttributes(
-        btn_close,
-        'data-bs-dismiss'="modal",
-        'data-bs-target' = sprintf('#modal-%s',id),
-        'aria-label'="Close"
-    )
-    btn_close <- btn_close %>% shinyjs::hidden()
 
     above_icon <- NULL
     if (!is.null(icon)) above_icon <- tags$i(class = paste("fa", icon))
@@ -318,16 +302,16 @@ cb_login_news_modal <- function(id, title = NULL, ...,
     modal <- tags$div(
         class = "modal",
         style = glue::glue('background-color: {background_color}'),
-        id = sprintf("modal-%s",id),
+        id = "shiny-modal",#sprintf("modal-%s",id),
         tabindex = "-1",
-        role = "dialog",
-        `aria-labelledby` = sprintf("modal-%s",id),
+        #role = "dialog",
+        #`aria-labelledby` = sprintf("modal-%s",id),
         `aria-hidden` = "true",
-        'data-bs-keyboard'="false",
-        'data-bs-backdrop'="static",
+        `data-bs-keyboard`="false",
+        `data-bs-backdrop`="static",
         tags$div(
             class = "modal-dialog modal-xl",
-            role = "document",
+            #role = "document",
             tags$div(
                 class = "modal-content",
                 above_content,
@@ -345,7 +329,7 @@ cb_login_news_modal <- function(id, title = NULL, ...,
                     ),
                     # begin content
                     tags$div(
-                        class = "block-content fs-sm mb-2",
+                        class = "modal-body block-content fs-sm mb-2",
                         cb_row(
                             cb_col6(
                                 style = 'padding-right: 30px; padding-left: 30px;
@@ -383,10 +367,18 @@ cb_login_news_modal <- function(id, title = NULL, ...,
 
                 )
             )
-        )
+        ),
+        tags$script(HTML(
+            "if (window.bootstrap && !window.bootstrap.Modal.VERSION.match(/^4\\./)) {
+         var modal = new bootstrap.Modal(document.getElementById('shiny-modal'));
+         modal.show();
+      } else {
+         $('#shiny-modal').modal().focus();
+      }"
+        ))
     )
-    
+
     tagList(
-        btn, btn_close, modal
+        modal
     )
 }
