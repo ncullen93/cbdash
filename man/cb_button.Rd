@@ -20,9 +20,6 @@ cb_button(
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

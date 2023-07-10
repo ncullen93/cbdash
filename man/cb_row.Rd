@@ -9,9 +9,6 @@ cb_row(..., mb = 2)
 \arguments{
 \item{side_button}{}
 }
-\value{
-
-}
 \description{
 Title
 }

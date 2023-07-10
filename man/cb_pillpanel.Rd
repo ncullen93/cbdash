@@ -9,9 +9,6 @@ cb_pillpanel(..., options = NULL)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

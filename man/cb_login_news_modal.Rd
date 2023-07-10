@@ -5,7 +5,6 @@
 \title{Title}
 \usage{
 cb_login_news_modal(
-  id,
   title = NULL,
   ...,
   news,
@@ -13,14 +12,12 @@ cb_login_news_modal(
   right_footer = NULL,
   brand = NULL,
   header = NULL,
-  background_color = NULL
+  background_color = NULL,
+  icon = NULL
 )
 }
 \arguments{
 \item{...}{}
-}
-\value{
-
 }
 \description{
 Title

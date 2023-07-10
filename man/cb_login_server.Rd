@@ -9,9 +9,6 @@ cb_login_server(id = "login")
 \arguments{
 \item{id}{}
 }
-\value{
-
-}
 \description{
 Title
 }

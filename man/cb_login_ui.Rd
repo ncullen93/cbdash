@@ -16,9 +16,6 @@ cb_login_ui(
 \arguments{
 \item{id}{}
 }
-\value{
-
-}
 \description{
 Title
 }

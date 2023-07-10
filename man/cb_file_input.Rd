@@ -19,9 +19,6 @@ cb_file_input(
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

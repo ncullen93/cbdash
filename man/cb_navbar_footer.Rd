@@ -9,9 +9,6 @@ cb_navbar_footer(...)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

@@ -9,9 +9,6 @@ cb_upgrade_card(title, cost, time, info, button, active = FALSE)
 \arguments{
 \item{button}{}
 }
-\value{
-
-}
 \description{
 Title
 }

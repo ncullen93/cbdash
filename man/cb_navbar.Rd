@@ -4,13 +4,17 @@
 \alias{cb_navbar}
 \title{Title}
 \usage{
-cb_navbar(brand = NULL, user = NULL, menu, footer = NULL, mini = FALSE)
+cb_navbar(
+  brand = NULL,
+  user = NULL,
+  menu,
+  footer = NULL,
+  mini = FALSE,
+  width = 250
+)
 }
 \arguments{
 \item{...}{}
-}
-\value{
-
 }
 \description{
 Title

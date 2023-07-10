@@ -19,9 +19,6 @@ cb_select_input(
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

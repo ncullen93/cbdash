@@ -4,13 +4,10 @@
 \alias{cb_item_block}
 \title{Title}
 \usage{
-cb_item_block(title, subtitle)
+cb_item_block(id, title, subtitle)
 }
 \arguments{
 \item{subtitle}{}
-}
-\value{
-
 }
 \description{
 Title

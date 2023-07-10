@@ -31,6 +31,7 @@ cb_text_input <- function(id, label, value = "", width = NULL, placeholder = NUL
     el
 }
 # email input
+#' @export
 cb_email_input <- function(id, label, value = "", width = NULL, placeholder = NULL,
                               floating = FALSE) {
     el <- cb_text_input(
@@ -41,6 +42,7 @@ cb_email_input <- function(id, label, value = "", width = NULL, placeholder = NU
 }
 
 # password input
+#' @export
 cb_password_input <- function(id, label, value = "", width = NULL, placeholder = NULL,
                               floating = FALSE) {
     el <- cb_text_input(

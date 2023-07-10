@@ -9,9 +9,6 @@ cb_modal_button(id, label, dialog, hidden = FALSE)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

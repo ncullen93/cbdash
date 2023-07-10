@@ -9,9 +9,6 @@ cb_activate_body_page(id, asis = TRUE)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

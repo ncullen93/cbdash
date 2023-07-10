@@ -9,9 +9,6 @@ cb_tab(id, title, content, icon = NULL)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

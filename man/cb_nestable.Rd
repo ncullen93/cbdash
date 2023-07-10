@@ -9,9 +9,6 @@ cb_nestable(items)
 \arguments{
 \item{items}{}
 }
-\value{
-
-}
 \description{
 Title
 }

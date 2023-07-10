@@ -9,9 +9,6 @@ cb_body_page(id, ..., modals = NULL)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

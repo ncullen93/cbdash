@@ -9,9 +9,6 @@ cb_muted_text(...)
 \arguments{
 \item{side_button}{}
 }
-\value{
-
-}
 \description{
 Title
 }

@@ -9,9 +9,6 @@ remove_css_class(tag, class, selector = NULL)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

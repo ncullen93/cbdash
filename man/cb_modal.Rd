@@ -15,9 +15,6 @@ cb_modal(
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

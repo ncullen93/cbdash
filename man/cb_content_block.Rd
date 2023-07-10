@@ -9,9 +9,6 @@ cb_content_block(title, subtitle, shadow = 5)
 \arguments{
 \item{side_button}{}
 }
-\value{
-
-}
 \description{
 Title
 }

@@ -9,9 +9,6 @@ cb_hovercard_placeholder(id, title, subtitle, icon = NULL)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

@@ -4,13 +4,10 @@
 \alias{cb_slider_input}
 \title{Title}
 \usage{
-cb_slider_input(id, label, min, max, value)
+cb_slider_input(id, label, min, max, value, step = NULL)
 }
 \arguments{
 \item{...}{}
-}
-\value{
-
 }
 \description{
 Title

@@ -9,9 +9,6 @@ is_valid_email(x)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

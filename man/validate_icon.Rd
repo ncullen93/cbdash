@@ -9,9 +9,6 @@ validate_icon(icon, fw = FALSE, opacity = NULL)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

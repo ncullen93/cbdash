@@ -9,9 +9,6 @@ cb_tabpanel_options(...)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

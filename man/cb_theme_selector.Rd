@@ -6,9 +6,6 @@
 \usage{
 cb_theme_selector()
 }
-\value{
-
-}
 \description{
 Title
 }

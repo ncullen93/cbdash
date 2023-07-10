@@ -9,9 +9,6 @@ cb_col(width, ..., offset = 0)
 \arguments{
 \item{side_button}{}
 }
-\value{
-
-}
 \description{
 Title
 }

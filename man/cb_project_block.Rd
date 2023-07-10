@@ -18,9 +18,6 @@ cb_project_block(
 \arguments{
 \item{side_button}{}
 }
-\value{
-
-}
 \description{
 Title
 }

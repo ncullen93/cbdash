@@ -9,9 +9,6 @@ cb_codeblock(language, code)
 \arguments{
 \item{code}{}
 }
-\value{
-
-}
 \description{
 Title
 }

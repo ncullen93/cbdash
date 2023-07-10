@@ -9,9 +9,6 @@ cb_navbar_item(id, title = NULL, icon = NULL)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

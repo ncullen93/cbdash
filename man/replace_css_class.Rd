@@ -9,9 +9,6 @@ replace_css_class(tag, old_class, new_class, selector = NULL)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

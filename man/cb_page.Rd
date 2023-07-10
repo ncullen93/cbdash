@@ -10,14 +10,12 @@ cb_page(
   body,
   auth = NULL,
   dependencies = NULL,
-  theme = c("default", "corporate", "earth", "elegance", "flat", "pulse")
+  theme = c("default", "corporate", "earth", "elegance", "flat", "pulse"),
+  sidebar_width = 250
 )
 }
 \arguments{
 \item{...}{}
-}
-\value{
-
 }
 \description{
 Title

@@ -9,9 +9,6 @@ cb_content_heading(title, side_button = NULL)
 \arguments{
 \item{side_button}{}
 }
-\value{
-
-}
 \description{
 Title
 }

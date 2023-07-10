@@ -16,9 +16,6 @@ cb_dropdown(
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

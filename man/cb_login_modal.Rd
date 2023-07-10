@@ -17,9 +17,6 @@ cb_login_modal(
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

@@ -9,9 +9,6 @@ cb_card(title, ..., subtitle = NULL, icon = NULL)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

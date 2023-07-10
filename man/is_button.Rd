@@ -9,9 +9,6 @@ is_button(el)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

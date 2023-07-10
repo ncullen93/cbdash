@@ -9,9 +9,6 @@ cb_hide_modal(id, asis = TRUE)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

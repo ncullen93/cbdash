@@ -9,9 +9,6 @@ cb_tabpanel(..., options = NULL, pills = FALSE)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }

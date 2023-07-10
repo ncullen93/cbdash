@@ -9,9 +9,6 @@ cb_header(...)
 \arguments{
 \item{...}{}
 }
-\value{
-
-}
 \description{
 Title
 }
